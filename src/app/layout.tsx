@@ -43,10 +43,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/web/cover.png",
+        url: "/assets/images/web/cover.png",
         width: 1200,
         height: 630,
-        alt: "TemanNgoding Cover",
+        alt: "Teman Ngoding Cover",
       }
     ]
   },
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "temanngoding.id - Kursus Coding Rancaekek",
     description: "Private tutoring & course online dengan gamifikasi ala RPG Game!",
-    images: ["/images/web/cover.png"],
+    images: ["/assets/images/web/cover.png"],
   },
   robots: {
     index: true,
@@ -80,6 +80,75 @@ export default function RootLayout({
   return (
     <html lang="id" className="scroll-smooth">
       <body className="bg-[#0a0d18] text-[#dfe3f5] font-space">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": ["EducationalOrganization", "LocalBusiness"],
+              name: "temanngoding.id",
+              url: "https://temanngoding.id",
+              logo: "https://temanngoding.id/assets/images/web/cover.png",
+              description:
+                "Tempat privat & les coding online/offline di Rancaekek buat yang serius mau jago IT. Kurikulum berbasis RPG game dengan mentor berpengalaman.",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Rancaekek",
+                addressRegion: "Jawa Barat",
+                addressCountry: "ID",
+              },
+              areaServed: {
+                "@type": "Place",
+                name: "Rancaekek, Bandung, Indonesia",
+              },
+              sameAs: [],
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "4.9",
+                reviewCount: "120",
+                bestRating: "5",
+              },
+              makesOffer: [
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Course",
+                    name: "Web Dev Fundamentals",
+                    description: "HTML, CSS, JS dasar — 8 sesi",
+                    provider: { "@type": "Organization", name: "temanngoding.id" },
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Course",
+                    name: "React & Next.js Mastery",
+                    description: "Component, state, routing — 10 sesi",
+                    provider: { "@type": "Organization", name: "temanngoding.id" },
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Course",
+                    name: "Laravel Backend Engineer",
+                    description: "REST API, Auth, DB — 12 sesi",
+                    provider: { "@type": "Organization", name: "temanngoding.id" },
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Course",
+                    name: "Bootcamp: Job-Ready Fullstack",
+                    description: "Project portofolio + interview prep — 16 sesi",
+                    provider: { "@type": "Organization", name: "temanngoding.id" },
+                  },
+                },
+              ],
+            }),
+          }}
+        />
         {children}
       </body>
     </html>
