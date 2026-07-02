@@ -49,8 +49,8 @@ const Navbar = () => {
                                 key={link.href}
                                 href={link.href}
                                 className={`relative py-1 transition-colors hover:text-[#52e0a8] before:content-['>\\00a0'] before:text-[#52e0a8] before:transition-opacity ${isActive(link.href)
-                                        ? "text-[#52e0a8] before:opacity-100"
-                                        : "before:opacity-0 hover:before:opacity-100"
+                                    ? "text-[#52e0a8] before:opacity-100"
+                                    : "before:opacity-0 hover:before:opacity-100"
                                     }`}
                             >
                                 {link.label}
@@ -83,14 +83,12 @@ const Navbar = () => {
                 </div>
             </nav>
 
-
-
             {/* Mobile menu panel */}
             <div
                 id="mobile-menu"
                 className={`fixed inset-x-0 top-[68px] z-50 bg-[#0a0d18]/95 border-b border-[#2a3358] transition-all duration-300 min-[860px]:hidden ${isOpen
-                        ? "opacity-100 pointer-events-auto"
-                        : "opacity-0 pointer-events-none"
+                    ? "opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none"
                     }`}
             >
                 <div className={`flex flex-col p-6 gap-[2px] transition-transform duration-300 ${isOpen ? "translate-y-0" : "-translate-y-4"}`}>
@@ -100,8 +98,8 @@ const Navbar = () => {
                             href={link.href}
                             onClick={() => setIsOpen(false)}
                             className={`font-mono text-[15px] px-[20px] py-[16px] border border-[#2a3358] transition-colors ${isActive(link.href)
-                                    ? "bg-[#181f38] border-[#52e0a8] text-[#52e0a8]"
-                                    : "bg-[#12172a] text-[#8891b8] hover:border-[#4a5694] hover:bg-[#181f38] hover:text-[#dfe3f5]"
+                                ? "bg-[#181f38] border-[#52e0a8] text-[#52e0a8]"
+                                : "bg-[#12172a] text-[#8891b8] hover:border-[#4a5694] hover:bg-[#181f38] hover:text-[#dfe3f5]"
                                 }`}
                         >
                             <span className="text-[#52e0a8] mr-2">&gt;</span>
