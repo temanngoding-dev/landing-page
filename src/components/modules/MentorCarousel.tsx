@@ -2,45 +2,9 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
+import { mentors } from '@/constants'
 
-interface MentorStat {
-  label: string
-  value: number
-  color: string
-}
-
-interface MentorData {
-  id: string
-  name: string
-  title: string
-  image: string
-  stats: MentorStat[]
-}
-
-const mentors: MentorData[] = [
-  {
-    id: 'MENTOR_01',
-    name: 'MENTOR_01',
-    title: '// Fullstack Engineer · Lv. 27',
-    image: '/assets/images/mentor/mirza.png',
-    stats: [
-      { label: 'EXP (Pengalaman Real)', value: 88, color: '#52e0a8' },
-      { label: 'MANA (Kesabaran Ngajar)', value: 70, color: '#7c9bff' },
-      { label: 'HP (Respon Chat)', value: 95, color: '#ff5d73' },
-    ],
-  },
-  {
-    id: 'MENTOR_02',
-    name: 'MENTOR_02',
-    title: '// Fullstack Engineer · Lv. 27',
-    image: '/assets/images/mentor/rio.png',
-    stats: [
-      { label: 'EXP (Pengalaman Real)', value: 88, color: '#52e0a8' },
-      { label: 'MANA (Kesabaran Ngajar)', value: 70, color: '#7c9bff' },
-      { label: 'HP (Respon Chat)', value: 95, color: '#ff5d73' },
-    ],
-  },
-]
+// Imported mentors from constants
 
 const INTERVAL_MS = 4500
 
@@ -62,7 +26,7 @@ export default function MentorCarousel() {
     <section
       aria-label="Mentor Carousel"
       aria-roledescription="carousel"
-      className="bg-[#12172a] border-2 border-[#4a5694] shadow-[4px_4px_0_#000] p-[22px] relative before:content-['MENTOR.DAT'] before:absolute before:-top-3 before:left-[16px] before:bg-[#0a0d18] before:px-2 before:font-mono before:text-[10px] before:text-[#8891b8] before:tracking-[1px]"
+      className="bg-bg-panel border-2 border-line-bright shadow-[4px_4px_0_#000] p-[22px] relative before:content-['MENTOR.DAT'] before:absolute before:-top-3 before:left-[16px] before:bg-bg-deep before:px-2 before:font-mono before:text-[10px] before:text-text-dim before:tracking-[1px]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -75,7 +39,7 @@ export default function MentorCarousel() {
           {mentors.map((mentor) => (
             <div key={mentor.id} className="w-full shrink-0">
               {/* Image */}
-              <div className="w-full aspect-square border-2 border-[#2a3358] relative overflow-hidden mb-[16px]">
+              <div className="w-full aspect-square border-2 border-line relative overflow-hidden mb-[16px]">
                 <Image
                   src={mentor.image}
                   alt={mentor.name}
@@ -87,21 +51,23 @@ export default function MentorCarousel() {
 
               {/* Name & title */}
               <div className="font-pixel text-[13px] mb-[6px]">{mentor.name}</div>
-              <div className="font-mono text-[12px] text-[#8891b8] mb-[18px]">{mentor.title}</div>
+              <div className="font-mono text-[12px] text-text-dim mb-[18px]">{mentor.title}</div>
 
               {/* Stats */}
               {mentor.stats.map((stat) => (
                 <div key={stat.label} className="mb-3">
-                  <div className="flex justify-between font-mono text-[10px] text-[#8891b8] mb-1">
+                  <div className="flex justify-between font-mono text-[10px] text-text-dim mb-1">
                     <span>{stat.label}</span>
-                    <span>{stat.value}%</span>
+                    <span style={{ color: stat.isBadge ? stat.color : '' }}>{stat.valueText}</span>
                   </div>
-                  <div className="h-[10px] bg-[#0a0d18] border border-[#2a3358]">
-                    <div
-                      className="h-full transition-all duration-700"
-                      style={{ width: `${stat.value}%`, backgroundColor: stat.color }}
-                    />
-                  </div>
+                  {!stat.isBadge && (
+                    <div className="h-[10px] bg-bg-deep border border-line">
+                      <div
+                        className="h-full transition-all duration-700"
+                        style={{ width: `${stat.percent}%`, backgroundColor: stat.color }}
+                      />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -116,9 +82,9 @@ export default function MentorCarousel() {
             key={i}
             onClick={() => setCurrent(i)}
             aria-label={`Go to mentor ${i + 1}`}
-            className={`w-[10px] h-[10px] border border-[#4a5694] transition-all duration-300 cursor-pointer ${i === current
-                ? 'bg-[#52e0a8] border-[#52e0a8] shadow-[0_0_6px_rgba(82,224,168,0.5)]'
-                : 'bg-[#0a0d18] hover:bg-[#2a3358]'
+            className={`w-[10px] h-[10px] border border-line-bright transition-all duration-300 cursor-pointer ${i === current
+                ? 'bg-xp border-xp shadow-[0_0_6px_rgba(82,224,168,0.5)]'
+                : 'bg-bg-deep hover:bg-line'
               }`}
           />
         ))}

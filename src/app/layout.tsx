@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
 import "./globals.css";
+import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -37,7 +39,16 @@ export const metadata: Metadata = {
     "Kabupaten Bandung",
     "Teman Ngoding",
     "Ngoding Seru",
-    "Belajar IT Seru"
+    "Belajar IT Seru",
+    "SMK Bandung Timur",
+    "Universitas Padjajaran",
+    "Bandung Timur",
+    "Rancaekek",
+    "Cileunyi",
+    "Jatinangor",
+    "Sumedang",
+    "SMK Al-Ma'soem",
+    "SMK Cileunyi"
   ],
   authors: [{ name: "Teman Ngoding Team" }],
   creator: "temanngoding.id",
@@ -90,7 +101,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className="scroll-smooth">
-      <body className="bg-[#0a0d18] text-[#dfe3f5] font-space">
+      <body className="bg-bg-deep text-text-main font-space">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -160,7 +171,9 @@ export default function RootLayout({
             }),
           }}
         />
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
