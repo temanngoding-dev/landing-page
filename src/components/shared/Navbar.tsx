@@ -72,7 +72,7 @@ const Navbar = () => {
                         >
                             <span className={`block w-[18px] h-[2px] bg-text-main transition-all duration-300 ${isOpen ? "translate-y-[7px] rotate-45" : ""}`} />
                             <span className={`block w-[18px] h-[2px] bg-text-main transition-all duration-300 ${isOpen ? "opacity-0 scale-x-0" : ""}`} />
-                            <span className={`block w-[18px] h-[2px] bg-text-main transition-all duration-300 ${isOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
+                            <span className={`block w-[18px] h-[2px] bg-text-main transition-all duration-300 ${isOpen ? "translate-y-[-7px] -rotate-45" : ""}`} />
                         </button>
                     </div>
                 </div>

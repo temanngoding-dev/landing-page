@@ -62,6 +62,7 @@ export const values: CoreValue[] = [
 export const courses: CourseData[] = [
   {
     icon: '🌐',
+    image: '/assets/images/course/basic-web-dev.png',
     title: 'Private 1-on-1: Fullstack Web Dev',
     description: 'Basic Web Dev with HTML, CSS, and JS Project Based. Langsung praktik bikin project personal blog.',
     topics: ['HTML5 Semantik', 'CSS Styling', 'JavaScript Basics', 'DOM Manipulation', 'Responsive Web Design', 'Project Deployment'],
@@ -72,6 +73,7 @@ export const courses: CourseData[] = [
   },
   {
     icon: '🤖',
+    image: '/assets/images/course/arduino.png',
     title: 'Private 1-on-1: Arduino Engineering',
     description: 'Belajar sains, teknologi, elektronika dasar, otomatisasi Arduino, sampai project nyata IoT menggunakan ESP32/Wemos.',
     topics: ['Dasar Elektronika', 'Arduino Programming', 'Sensor & Aktuator', 'Sistem Otomatisasi', 'Internet of Things (IoT)', 'ESP32/Wemos'],
@@ -79,16 +81,6 @@ export const courses: CourseData[] = [
     difficulty: 'MEDIUM',
     difficultyColor: '#ffc857',
     xp: 400,
-  },
-  {
-    icon: '🐉',
-    title: 'Bootcamp: Intensive Project',
-    description: 'Bimbingan intensif dan penyelesaian development project akhir mahasiswa atau siswa SMK berbasis website.',
-    topics: ['Project Planning', 'System Design', 'Tech Stack Custom (Sesuai Kebutuhan)', 'Code Review', 'Debugging', 'Final Delivery'],
-    sessions: 8,
-    difficulty: 'BOSS FIGHT',
-    difficultyColor: '#ff5d73',
-    xp: 800,
   },
 ];
 

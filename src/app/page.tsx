@@ -1,6 +1,8 @@
 import MentorCarousel from '@/components/modules/MentorCarousel'
 import TestimonialCarousel from '@/components/modules/TestimonialCarousel'
 import Link from 'next/link'
+import Image from 'next/image'
+import { courses } from '@/constants'
 
 export default function Home() {
   return (
@@ -47,38 +49,30 @@ export default function Home() {
               <div className="font-mono text-[12px] text-mana mb-[10px]">// QUEST_LOG</div>
               <h2 className="font-pixel text-[20px] leading-[1.6]">Pilih Quest Belajarmu</h2>
             </div>
-            <div className="flex flex-col gap-[2px]">
-
-              <article className="grid grid-cols-[48px_1fr] max-[860px]:grid-cols-[48px_1fr] min-[860px]:grid-cols-[64px_1fr_auto_auto] gap-y-[8px] min-[860px]:gap-y-0 gap-x-[18px] items-center bg-bg-panel border border-line px-[20px] py-[18px] transition-colors hover:border-xp hover:bg-bg-panel-2 group">
-                <div className="w-[48px] h-[48px] flex items-center justify-center bg-bg-deep border border-line-bright text-[20px]" aria-hidden="true">🌐</div>
-                <div>
-                  <h3 className="font-semibold text-[15px] mb-[4px]">Private 1-on-1: Fullstack Web Dev</h3>
-                  <p className="font-mono text-[11px] text-text-dim">HTML, CSS, JS Project Based — 2 Sesi (120 Menit)</p>
-                </div>
-                <div className="col-start-2 min-[860px]:col-start-auto font-mono text-[10px] px-[8px] py-[4px] border border-xp text-xp whitespace-nowrap w-fit">EASY</div>
-                <div className="col-start-2 min-[860px]:col-start-auto font-mono text-[13px] text-gold min-[860px]:text-right whitespace-nowrap">+150 XP</div>
-              </article>
-
-              <article className="grid grid-cols-[48px_1fr] max-[860px]:grid-cols-[48px_1fr] min-[860px]:grid-cols-[64px_1fr_auto_auto] gap-y-[8px] min-[860px]:gap-y-0 gap-x-[18px] items-center bg-bg-panel border border-line px-[20px] py-[18px] transition-colors hover:border-xp hover:bg-bg-panel-2 group">
-                <div className="w-[48px] h-[48px] flex items-center justify-center bg-bg-deep border border-line-bright text-[20px]" aria-hidden="true">🤖</div>
-                <div>
-                  <h3 className="font-semibold text-[15px] mb-[4px]">Private 1-on-1: Arduino Engineering</h3>
-                  <p className="font-mono text-[11px] text-text-dim">Sains, Elektronika, Sistem Otomatis & IoT — 8 Sesi (120 Menit)</p>
-                </div>
-                <div className="col-start-2 min-[860px]:col-start-auto font-mono text-[10px] px-[8px] py-[4px] border border-gold text-gold whitespace-nowrap w-fit">MEDIUM</div>
-                <div className="col-start-2 min-[860px]:col-start-auto font-mono text-[13px] text-gold min-[860px]:text-right whitespace-nowrap">+400 XP</div>
-              </article>
-
-              <article className="grid grid-cols-[48px_1fr] max-[860px]:grid-cols-[48px_1fr] min-[860px]:grid-cols-[64px_1fr_auto_auto] gap-y-[8px] min-[860px]:gap-y-0 gap-x-[18px] items-center bg-bg-panel border border-line px-[20px] py-[18px] transition-colors hover:border-xp hover:bg-bg-panel-2 group">
-                <div className="w-[48px] h-[48px] flex items-center justify-center bg-bg-deep border border-line-bright text-[20px]" aria-hidden="true">🐉</div>
-                <div>
-                  <h3 className="font-semibold text-[15px] mb-[4px]">Bootcamp: Intensive Project</h3>
-                  <p className="font-mono text-[11px] text-text-dim">Bimbingan Project Akhir / Mahasiswa & SMK — 8 Sesi (120 Menit)</p>
-                </div>
-                <div className="col-start-2 min-[860px]:col-start-auto font-mono text-[10px] px-[8px] py-[4px] border border-hp text-hp whitespace-nowrap w-fit">BOSS FIGHT</div>
-                <div className="col-start-2 min-[860px]:col-start-auto font-mono text-[13px] text-gold min-[860px]:text-right whitespace-nowrap">+800 XP</div>
-              </article>
-
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
+              {courses.map((course) => (
+                <article
+                  key={course.title}
+                  className="bg-bg-panel border-2 border-line transition-all hover:border-line-bright hover:bg-bg-panel-2 group relative flex flex-col"
+                >
+                  <div className="w-full aspect-4/3 border-b-2 border-line relative overflow-hidden bg-bg-deep group-hover:border-line-bright transition-colors">
+                    <Image src={course.image} alt={course.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div className="absolute top-[16px] left-[16px] w-[44px] h-[44px] flex items-center justify-center bg-bg-deep/80 backdrop-blur-sm border border-line-bright text-[20px] shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
+                      {course.icon}
+                    </div>
+                  </div>
+                  <div className="p-[20px]">
+                    <h3 className="font-semibold text-[16px] text-text-main mb-[8px]">{course.title}</h3>
+                    <p className="font-mono text-[12px] text-text-dim mb-[16px]">{course.description.slice(0, 100)}...</p>
+                    <div className="flex items-center gap-[12px] mt-auto">
+                      <span className="font-mono text-[10px] px-[8px] py-[3px] border" style={{ borderColor: course.difficultyColor, color: course.difficultyColor }}>
+                        {course.difficulty}
+                      </span>
+                      <span className="font-mono text-[12px] text-gold">+{course.xp} XP</span>
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -89,7 +83,7 @@ export default function Home() {
               <div className="font-mono text-[12px] text-mana mb-[10px]">// SELECT_YOUR_PLAN</div>
               <h2 className="font-pixel text-[20px] leading-[1.6]">Pilih Paket Belajar</h2>
             </div>
-            <div className="grid grid-cols-1 min-[860px]:grid-cols-3 gap-[20px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
 
               <article className="bg-bg-panel border-2 border-line px-[22px] py-[28px] relative transition-transform duration-150 hover:-translate-y-1 hover:border-line-bright">
                 <div className="font-pixel text-[11px] text-text-dim mb-[10px]">LV.1</div>
@@ -108,27 +102,14 @@ export default function Home() {
                 <div className="absolute top-[-12px] right-[16px] bg-gold text-[#1a1300] font-mono text-[10px] font-bold px-[10px] py-[4px]">PALING LARIS</div>
                 <div className="font-pixel text-[11px] text-text-dim mb-[10px]">LV.2</div>
                 <h3 className="text-[18px] font-bold mb-[6px]">Arduino Engineering</h3>
-                <div className="font-mono text-[24px] text-xp mb-[6px]">Rp600.000<span className="text-[12px] text-text-dim">/paket</span></div>
-                <div className="font-mono text-[12px] text-text-dim line-through mb-[18px]">Rp950.000</div>
+                <div className="font-mono text-[24px] text-xp mb-[6px]">Rp150.000<span className="text-[12px] text-text-dim">/paket</span></div>
+                <div className="font-mono text-[12px] text-text-dim line-through mb-[18px]">Rp350.000</div>
                 <ul className="text-[13px] text-text-dim flex flex-col gap-[10px] mb-[24px]">
                   <li className="flex gap-[8px] before:content-['▸'] before:text-xp">Total 8 Sesi (120 Menit/sesi)</li>
                   <li className="flex gap-[8px] before:content-['▸'] before:text-xp">Elektronika & Sistem Otomatis</li>
                   <li className="flex gap-[8px] before:content-['▸'] before:text-xp">ESP32 & Solusi IoT Nyata</li>
                 </ul>
                 <a href="#quests" className="flex justify-center font-mono font-semibold text-[14px] px-[24px] py-[14px] border-2 border-black shadow-[4px_4px_0_#000] cursor-pointer transition-all bg-xp text-[#04140d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#000] w-full">PILIH</a>
-              </article>
-
-              <article className="bg-bg-panel border-2 border-line px-[22px] py-[28px] relative transition-transform duration-150 hover:-translate-y-1 hover:border-line-bright">
-                <div className="font-pixel text-[11px] text-text-dim mb-[10px]">LV.3</div>
-                <h3 className="text-[18px] font-bold mb-[6px]">Intensive Project</h3>
-                <div className="font-mono text-[24px] text-xp mb-[6px]">Rp800.000<span className="text-[12px] text-text-dim">/paket</span></div>
-                <div className="font-mono text-[12px] text-text-dim line-through mb-[18px]">Rp1.200.000</div>
-                <ul className="text-[13px] text-text-dim flex flex-col gap-[10px] mb-[24px]">
-                  <li className="flex gap-[8px] before:content-['▸'] before:text-xp">Total 8 Sesi (120 Menit/sesi)</li>
-                  <li className="flex gap-[8px] before:content-['▸'] before:text-xp">Bimbingan Project Akhir</li>
-                  <li className="flex gap-[8px] before:content-['▸'] before:text-xp">Tech Stack Sesuai Kebutuhan</li>
-                </ul>
-                <a href="#quests" className="flex justify-center font-mono font-semibold text-[14px] px-[24px] py-[14px] border-2 border-line-bright shadow-[4px_4px_0_#000] cursor-pointer transition-all bg-bg-panel text-text-main hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#000] w-full">PILIH</a>
               </article>
 
             </div>

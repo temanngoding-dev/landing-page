@@ -24,6 +24,7 @@ export interface CoreValue {
 
 export interface CourseData {
   icon: string;
+  image: string;
   title: string;
   description: string;
   topics: string[];
