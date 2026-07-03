@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
-import { courses } from '@/constants'
+import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton'
+import { courses, WHATSAPP_NUMBER } from '@/constants'
 
 export const metadata: Metadata = {
   title: 'All Course',
@@ -36,13 +36,16 @@ export default function CoursePage() {
           <div className="max-w-[1120px] mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
               {courses.map((course) => (
-                <article
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Halo Teman Ngoding! Saya tertarik untuk mendaftar paket ${course.packageName} materi ${course.title}.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   key={course.title}
-                  className="bg-bg-panel border-2 border-line transition-all hover:border-line-bright hover:bg-bg-panel-2 group relative flex flex-col"
+                  className="bg-bg-panel border-2 border-line transition-all hover:border-xp hover:bg-bg-panel-2 group relative flex flex-col cursor-pointer"
                 >
                   {/* Course Image */}
                   <div className="w-full aspect-4/3 border-b-2 border-line relative overflow-hidden bg-bg-deep group-hover:border-line-bright transition-colors">
-                    <Image src={course.image} alt={course.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <ImageWithSkeleton src={course.image} alt={course.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div className="absolute top-[16px] left-[16px] w-[44px] h-[44px] flex items-center justify-center bg-bg-deep/80 backdrop-blur-sm border border-line-bright text-[20px] shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
                       {course.icon}
                     </div>
@@ -52,7 +55,8 @@ export default function CoursePage() {
                     {/* Header */}
                     <div className="flex items-start gap-[16px] mb-[16px]">
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-[10px] flex-wrap mb-[4px]">
+                        <div className="flex items-center gap-[10px] flex-wrap mb-[2px]">
+                          <span className="font-pixel text-[10px] text-text-dim">LV.{course.level}</span>
                           <h3 className="font-semibold text-[16px] text-text-main">{course.title}</h3>
                           <span
                             className="font-mono text-[10px] px-[8px] py-[3px] border whitespace-nowrap"
@@ -61,12 +65,25 @@ export default function CoursePage() {
                             {course.difficulty}
                           </span>
                         </div>
+                        <p className="font-mono text-[11px] text-mana mb-[4px]">{course.packageName}</p>
                         <p className="font-mono text-[11px] text-text-dim">{course.sessions} sesi · +{course.xp} XP</p>
                       </div>
                     </div>
 
                     {/* Description */}
-                    <p className="text-[13px] text-text-dim leading-[1.65] mb-[18px]">{course.description}</p>
+                    <p className="text-[13px] text-text-dim leading-[1.65] mb-[14px]">{course.description}</p>
+
+                    {/* Point highlights */}
+                    {course.point.length > 0 && (
+                      <div className="mb-[18px]">
+                        <div className="font-mono text-[10px] text-xp mb-[8px] uppercase tracking-[1px]">Highlight</div>
+                        <ul className="text-[12px] text-text-dim flex flex-col gap-[6px]">
+                          {course.point.map((pt, i) => (
+                            <li key={i} className="flex gap-[8px] before:content-['▸'] before:text-xp">{pt}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                     {/* Topics */}
                     <div className="mb-[20px]">
@@ -97,7 +114,7 @@ export default function CoursePage() {
                       </div>
                     </div>
                   </div>
-                </article>
+                </a>
               ))}
             </div>
           </div>
@@ -131,16 +148,17 @@ export default function CoursePage() {
           </div>
         </section>
 
-        {/* CTA */}
         <section className="text-center py-[90px] px-6 bg-bg-panel border-y-2 border-line" aria-label="Call to Action">
           <h2 className="font-pixel text-[22px] leading-[1.7] mb-[20px] text-text-main">Ready Player One?</h2>
           <p className="font-mono text-text-dim mb-[32px]">Slot belajar terbatas tiap minggunya. Mulai quest pertamamu sekarang.</p>
-          <Link
-            href="/#levels"
+          <a
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Halo Teman Ngoding! Saya ingin daftar dan tanya-tanya soal program belajarnya.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-mono font-semibold text-[14px] px-[24px] py-[14px] border-2 border-black shadow-[4px_4px_0_#000] cursor-pointer transition-all inline-flex items-center gap-[8px] bg-xp text-[#04140d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#000]"
           >
             ▶ DAFTAR SEKARANG
-          </Link>
+          </a>
         </section>
       </main>
     </>

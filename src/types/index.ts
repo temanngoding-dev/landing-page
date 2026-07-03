@@ -6,10 +6,13 @@ export interface MentorStat {
   isBadge?: boolean;
 }
 
+export type MentorBadge = 'NEWBIE' | 'PROFESSIONAL' | 'MASTER' | 'HEROES' | 'KING' | 'GOD';
+
 export interface MentorData {
   id: string;
   name: string;
   title: string;
+  level: number;
   image: string;
   bio?: string;
   skills?: string[];
@@ -25,13 +28,16 @@ export interface CoreValue {
 export interface CourseData {
   icon: string;
   image: string;
+  packageName: string;
   title: string;
   description: string;
   topics: string[];
   sessions: number;
+  point: string[];
   difficulty: string;
   difficultyColor: string;
   xp: number;
+  level: number;
 }
 
 export interface TestimonialData {

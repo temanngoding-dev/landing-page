@@ -1,19 +1,20 @@
-import type { 
-  MentorData, 
-  CoreValue, 
-  CourseData, 
-  TestimonialData, 
-  NavLink, 
-  SocialLink 
+import type {
+  MentorData,
+  CoreValue,
+  CourseData,
+  TestimonialData,
+  NavLink,
+  SocialLink
 } from '@/types';
 
 export const mentors: MentorData[] = [
   {
     id: 'MENTOR_01',
     name: 'Mirza Qamaruzzaman',
-    title: 'Fullstack Engineer · Lv. 30',
+    title: 'Frontend Engineer',
+    level: 35,
     image: '/assets/images/mentor/mirza.png',
-    bio: 'Fullstack engineer dengan pengalaman lebih dari 2 tahun di industri tech. Spesialisasi di React, Next.js, Laravel, dan arsitektur backend modern.',
+    bio: 'Fullstack engineer dengan spesialisasi di bidang Frontend Web Development. Pengalaman lebih dari 2 tahun di industri tech dengan berbagai tech stack modern seperti Next.js, Laravel, PostgreSQL, dll.',
     skills: ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Vue.js', 'Nuxt.js', 'Redis', 'Pinia', 'Typescript', 'Zustand', 'Redux', 'SQlite', 'MySQL', 'MongoDB', 'Express', 'NestJS', 'Code Igniter', 'Postman', 'Git', 'GitHub', 'GitLab', 'Figma', 'JWT Auth', 'OAuth'],
     stats: [
       { label: 'EXP (Experience)', valueText: '2+ Tahun', percent: 50, color: '#52e0a8' },
@@ -23,8 +24,9 @@ export const mentors: MentorData[] = [
   },
   {
     id: 'MENTOR_02',
-    name: 'MENTOR_02',
-    title: 'Fullstack Engineer · Lv. 27',
+    name: 'Rio Andrianto S.Kom',
+    title: 'Fullstack Engineer',
+    level: 52,
     image: '/assets/images/mentor/rio.png',
     bio: 'Fullstack engineer dengan pengalaman lebih dari 5 tahun di industri tech. Spesialisasi di React, Next.js, Laravel, dan arsitektur backend modern.',
     skills: ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Docker'],
@@ -63,24 +65,39 @@ export const courses: CourseData[] = [
   {
     icon: '🌐',
     image: '/assets/images/course/basic-web-dev.png',
-    title: 'Private 1-on-1: Fullstack Web Dev',
+    packageName: 'Private 1-on-1',
+    title: 'Basic Web Dev',
     description: 'Basic Web Dev with HTML, CSS, and JS Project Based. Langsung praktik bikin project personal blog.',
-    topics: ['HTML5 Semantik', 'CSS Styling', 'JavaScript Basics', 'DOM Manipulation', 'Responsive Web Design', 'Project Deployment'],
+    topics: [
+      'HTML5 Semantik', 'CSS Styling', 'JavaScript Basics', 'DOM Manipulation', 'Responsive Web Design', 'Project Deployment'],
     sessions: 2,
     difficulty: 'EASY',
     difficultyColor: '#52e0a8',
     xp: 150,
+    level: 1,
+    point: [
+      'Total 2 Sesi (120 menit/sesi)',
+      'Basic HTML, CSS, JS',
+      'Project Personal Blog'
+    ]
   },
   {
     icon: '🤖',
     image: '/assets/images/course/arduino.png',
-    title: 'Private 1-on-1: Arduino Engineering',
+    packageName: 'Private 1-on-1',
+    title: 'Arduino Engineering',
     description: 'Belajar sains, teknologi, elektronika dasar, otomatisasi Arduino, sampai project nyata IoT menggunakan ESP32/Wemos.',
     topics: ['Dasar Elektronika', 'Arduino Programming', 'Sensor & Aktuator', 'Sistem Otomatisasi', 'Internet of Things (IoT)', 'ESP32/Wemos'],
-    sessions: 8,
+    sessions: 2,
     difficulty: 'MEDIUM',
     difficultyColor: '#ffc857',
     xp: 400,
+    level: 1,
+    point: [
+      'Total 2 Sesi (120 menit/sesi)',
+      'Elektronika & Sistem Otomatis',
+      'ESP32 & Solusi IoT Nyata'
+    ]
   },
 ];
 
@@ -106,7 +123,7 @@ export const testimonials: TestimonialData[] = [
 ];
 
 export const NAV_LINKS: NavLink[] = [
-  { href: '/', label: 'Beranda' },
+  { href: '/', label: 'Home' },
   { href: '/course', label: 'Course' },
   { href: '/about', label: 'About' },
 ];
@@ -119,6 +136,12 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 export const ADDRESS = 'Mutiara Venue Estate Blok MR No 10 Jl. Rancakihiang, Bojongloa, Kec. Rancaekek, Kab. Bandung, Jawa Barat 40394';
-export const WHATSAPP_NUMBER = '6281234567890';
+export const WHATSAPP_NUMBER = '6281320478484';
+export const WHATSAPP_DISPLAY = '+62 813-2047-8484';
+export const EMAIL_ADDRESS = 'temanngoding.id@gmail.com';
+export const OPERATIONAL_HOURS = [
+  'Weekdays : 15:00 - 18:00 WIB',
+  'Weekend : 10:00 - 18:00 WIB'
+];
 export const MAP_LAT = -6.9617414;
 export const MAP_LNG = 107.7675156;
