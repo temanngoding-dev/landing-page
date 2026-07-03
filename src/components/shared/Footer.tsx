@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState, useCallback } from 'react'
 import { usePathname } from 'next/navigation'
-import { NAV_LINKS, SOCIAL_LINKS, ADDRESS, WHATSAPP_NUMBER, MAP_LAT, MAP_LNG, WHATSAPP_DISPLAY, EMAIL_ADDRESS, OPERATIONAL_HOURS } from '@/constants'
+import { NAV_LINKS, ADDRESS, WHATSAPP_NUMBER, MAP_LAT, MAP_LNG, WHATSAPP_DISPLAY, EMAIL_ADDRESS, OPERATIONAL_HOURS } from '@/constants'
 import Modal from './Modal'
 
 export default function Footer() {
@@ -52,7 +52,13 @@ export default function Footer() {
         showModal('SUKSES', 'Berhasil subscribe! Nomor WA kamu sudah disimpan.');
         setWaInput('');
       } else {
-        showModal('ERROR', 'Gagal menyimpan nomor WA. Silakan coba lagi.');
+        const data = await res.json().catch(() => ({}));
+        if (data.exists) {
+          showModal('INFO', 'nomormu sudah kami terima. tunggu pesan terbaru dari kami ya!');
+          setWaInput('');
+        } else {
+          showModal('ERROR', 'Gagal menyimpan nomor WA. Silakan coba lagi.');
+        }
       }
     } catch (error) {
       console.error('Error saving lead:', error);

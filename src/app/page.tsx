@@ -46,7 +46,7 @@ export default function Home() {
         <section className="py-[80px]" id="quests" aria-label="Daftar Course">
           <div className="max-w-[1120px] mx-auto px-6">
             <div className="mb-[48px]">
-              <div className="font-mono text-[12px] text-mana mb-[10px]">// QUEST_LOG</div>
+              <div className="font-mono text-[12px] text-mana mb-[10px]">{'// QUEST_LOG'}</div>
               <h2 className="font-pixel text-[20px] leading-[1.6]">Pilih Quest Belajarmu</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
@@ -92,7 +92,7 @@ export default function Home() {
         <section className="py-[80px]" id="levels" aria-label="Paket Harga">
           <div className="max-w-[1120px] mx-auto px-6">
             <div className="mb-[48px]">
-              <div className="font-mono text-[12px] text-mana mb-[10px]">// SELECT_YOUR_PLAN</div>
+              <div className="font-mono text-[12px] text-mana mb-[10px]">{'// SELECT_YOUR_PLAN'}</div>
               <h2 className="font-pixel text-[20px] leading-[1.6]">Pilih Paket Belajar</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">

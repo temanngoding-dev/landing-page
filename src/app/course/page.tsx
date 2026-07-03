@@ -124,7 +124,7 @@ export default function CoursePage() {
         <section className="py-[80px]" aria-label="Cara Belajar">
           <div className="max-w-[1120px] mx-auto px-6">
             <div className="mb-[48px]">
-              <div className="font-mono text-[12px] text-mana mb-[10px]">// HOW_IT_WORKS</div>
+              <div className="font-mono text-[12px] text-mana mb-[10px]">{'// HOW_IT_WORKS'}</div>
               <h2 className="font-pixel text-[20px] leading-[1.6]">Gimana Cara Belajarnya?</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-[2px]">

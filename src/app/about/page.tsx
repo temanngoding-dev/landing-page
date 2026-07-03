@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
+import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton'
 import { mentors, values } from '@/constants'
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default function AboutPage() {
         <section className="py-[80px]" aria-label="Keunggulan Kami">
           <div className="max-w-[1120px] mx-auto px-6">
             <div className="mb-[48px]">
-              <div className="font-mono text-[12px] text-mana mb-[10px]">// CORE_VALUES</div>
+              <div className="font-mono text-[12px] text-mana mb-[10px]">{'// CORE_VALUES'}</div>
               <h2 className="font-pixel text-[20px] leading-[1.6]">Kenapa Belajar di Sini?</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
@@ -63,7 +63,7 @@ export default function AboutPage() {
         <section className="py-[80px]" aria-label="Profil Mentor">
           <div className="max-w-[1120px] mx-auto px-6">
             <div className="mb-[48px]">
-              <div className="font-mono text-[12px] text-mana mb-[10px]">// PARTY_MEMBERS</div>
+              <div className="font-mono text-[12px] text-mana mb-[10px]">{'// PARTY_MEMBERS'}</div>
               <h2 className="font-pixel text-[20px] leading-[1.6]">Meet the Mentors</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
@@ -74,7 +74,7 @@ export default function AboutPage() {
                 >
                   {/* Avatar */}
                   <div className="w-full aspect-4/3 border-2 border-line relative overflow-hidden mb-[16px]">
-                    <Image
+                    <ImageWithSkeleton
                       src={mentor.image}
                       alt={mentor.name}
                       fill
@@ -85,7 +85,7 @@ export default function AboutPage() {
 
                   {/* Info */}
                   <h3 className="font-pixel text-[13px] mb-[4px]">{mentor.name}</h3>
-                  <div className="font-mono text-[12px] text-text-dim mb-[14px]">// {mentor.title}</div>
+                  <div className="font-mono text-[12px] text-text-dim mb-[14px]">{'// '}{mentor.title}</div>
                   <p className="text-[13px] text-text-dim leading-[1.65] mb-[16px]">{mentor.bio}</p>
 
                   {/* Skill tags */}
@@ -127,7 +127,7 @@ export default function AboutPage() {
         <section className="py-[80px]" aria-label="Cerita Kami">
           <div className="max-w-[1120px] mx-auto px-6">
             <div className="bg-bg-panel-2 border-2 border-dashed border-line-bright p-[32px] md:p-[48px]">
-              <div className="font-mono text-[12px] text-gold mb-[16px]">// OUR_STORY.log</div>
+              <div className="font-mono text-[12px] text-gold mb-[16px]">{'// OUR_STORY.log'}</div>
               <h2 className="font-pixel text-[18px] leading-[1.6] mb-[20px]">Cerita Singkat</h2>
               <div className="text-[15px] text-text-dim leading-[1.8] max-w-[720px] space-y-4">
                 <p>

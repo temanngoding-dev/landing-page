@@ -57,3 +57,8 @@ export interface SocialLink {
   href: string;
   icon: string;
 }
+
+export interface LeadData {
+  phone: string;
+  timestamp: string;
+}

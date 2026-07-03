@@ -1,6 +1,24 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+
+// Gunakan environment variable untuk URL Apps Script
+const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
+
+export async function GET() {
+  try {
+    if (!GOOGLE_SCRIPT_URL) {
+      return NextResponse.json({ success: true, data: [] });
+    }
+
+    // Fetch data dari Google Sheets (menjalankan doGet di Apps Script)
+    const res = await fetch(GOOGLE_SCRIPT_URL);
+    const data = await res.json();
+
+    return NextResponse.json({ success: true, data: data.data || [] });
+  } catch (error) {
+    console.error('Error fetching leads:', error);
+    return NextResponse.json({ error: 'Failed to fetch leads' }, { status: 500 });
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -10,31 +28,30 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Phone number is required' }, { status: 400 });
     }
 
-    const dataFilePath = path.join(process.cwd(), 'data', 'leads.json');
-    
-    // Ensure the directory exists
-    await fs.mkdir(path.dirname(dataFilePath), { recursive: true });
-
-    let leads = [];
-    try {
-      const fileData = await fs.readFile(dataFilePath, 'utf-8');
-      if (fileData) {
-        leads = JSON.parse(fileData);
-      }
-    } catch (error: any) {
-      if (error.code !== 'ENOENT') {
-        throw error;
-      }
+    if (!GOOGLE_SCRIPT_URL) {
+      // Kita hanya log di internal server, tidak dikembalikan ke frontend
+      console.error('SYSTEM WARNING: GOOGLE_SCRIPT_URL is missing. Check .env config.');
+      return NextResponse.json({ error: 'Layanan sedang tidak tersedia. Silakan coba lagi nanti.' }, { status: 500 });
     }
 
-    const newLead = {
-      phone,
-      timestamp: new Date().toISOString(),
-    };
+    // Forward request ke Google Apps Script (menjalankan doPost di Apps Script)
+    const res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain', // Menggunakan text/plain untuk menghindari CORS preflight di Apps Script
+      },
+      body: JSON.stringify({ phone }),
+    });
 
-    leads.push(newLead);
+    const data = await res.json();
 
-    await fs.writeFile(dataFilePath, JSON.stringify(leads, null, 2));
+    if (data.exists) {
+      return NextResponse.json({ error: 'Phone number already exists', exists: true }, { status: 409 });
+    }
+
+    if (data.error) {
+      return NextResponse.json({ error: data.error }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true, message: 'Lead saved successfully' });
   } catch (error) {
