@@ -90,7 +90,7 @@ export default function AboutPage() {
 
                 {/* Skill tags */}
                 <div className="flex flex-wrap gap-[6px] mb-[18px]">
-                  {mentor.skills.map((skill) => (
+                  {mentor.skills?.map((skill) => (
                     <span
                       key={skill}
                       className="font-mono text-[10px] px-[8px] py-[3px] border border-line text-mana bg-bg-deep"
