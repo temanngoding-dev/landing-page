@@ -89,6 +89,14 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "96x96" },
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "48x48" },
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "32x32" },
+    ],
+  },
   verification: {
     google: "google-site-verification=Ey2ECY5JvG2YVkobe6ezl8oFMthIrBggO06_qJDa3eY",
   },

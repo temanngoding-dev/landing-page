@@ -32,7 +32,7 @@ const Navbar = () => {
                 <div className="relative z-50 max-w-[1120px] mx-auto px-6 flex items-center justify-between h-[68px]">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-[10px]">
-                        <div className="w-[28px] h-[28px] bg-xp [clip-path:polygon(0%_20%,20%_0%,80%_0%,100%_20%,100%_80%,80%_100%,20%_100%,0%_80%)] shadow-[0_0_0_2px_#000,0_0_14px_rgba(82,224,168,0.6)]">
+                        <div className="w-[36px] h-[36px] bg-white [clip-path:polygon(0%_20%,20%_0%,80%_0%,100%_20%,100%_80%,80%_100%,20%_100%,0%_80%)] shadow-[0_0_0_2px_#000,0_0_14px_rgba(255,255,255,0.4)]">
                             <img src="/assets/images/icons/icon.svg" alt="Logo" />
                         </div>
                         <div className="font-pixel text-[11px] text-text-main">
