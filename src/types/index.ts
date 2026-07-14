@@ -26,11 +26,14 @@ export interface CoreValue {
 }
 
 export interface CourseData {
+  slug: string;
   icon: string;
   image: string;
   packageName: string;
   title: string;
   description: string;
+  longDescription?: string;
+  syllabusUrl?: string;
   topics: string[];
   sessions: number;
   point: string[];
@@ -38,6 +41,40 @@ export interface CourseData {
   difficultyColor: string;
   xp: number;
   level: number;
+  targetAudience?: string[];
+  price?: number;
+  originalPrice?: number;
+}
+
+export interface LearningPackage {
+  slug: string;
+  title: string;
+  tagline: string;
+  icon: string;
+  image?: string;
+  courseSlugs: string[]; // ordered list of course slugs
+  totalSessions: number;
+  totalXP: number;
+  price: number;
+  originalPrice: number;
+  isPopular?: boolean;
+  level: number;
+  difficulty: string;
+  difficultyColor: string;
+  highlights: string[];
+  description: string;
+}
+
+export interface DevService {
+  slug: string;
+  icon: string;
+  title: string;
+  description: string;
+  features: string[];
+  estimatePrice: string;
+  techStack: string[];
+  duration: string;
+  isPopular?: boolean;
 }
 
 export interface TestimonialData {
@@ -50,6 +87,7 @@ export interface TestimonialData {
 export interface NavLink {
   href: string;
   label: string;
+  children?: NavLink[];
 }
 
 export interface SocialLink {
