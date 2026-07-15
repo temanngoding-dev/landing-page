@@ -25,55 +25,65 @@ import type {
   BlogPost
 } from '@/types';
 
+const mirzaSkills = ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Vue.js', 'Nuxt.js', 'Redis', 'Pinia', 'Typescript', 'Zustand', 'Redux', 'SQlite', 'MySQL', 'MongoDB', 'Express', 'NestJS', 'Code Igniter', 'Postman', 'Git', 'GitHub', 'GitLab', 'Figma', 'JWT Auth', 'OAuth'];
+
+const rioSkills = ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Docker', 'IOT Stack', 'Arduino', 'ESP32', 'Appscript', 'PHP', 'MySQL', 'SQLite', 'MongoDB', 'Express', 'Postman', 'Git', 'GitHub', 'GitLab', 'Figma', 'JWT Auth', 'OAuth', 'Proxmox', 'Mikrotik', 'Roblox', 'Web3', 'Expo', 'C#', 'VB.NET', 'Python', 'React Native'];
+
+const totalUniqueSkills = new Set([...mirzaSkills, ...rioSkills]).size;
+
+const mirzaExp = 4;
+const rioExp = 15;
+const maxExp = Math.max(mirzaExp, rioExp, 10); // Minimum 10 tahun sbg baseline
+
+const calcLevel = (skills: number, exp: number) => skills + Math.floor(exp * 1.5);
+
 export const mentors: MentorData[] = [
   {
     id: 'MENTOR_01',
     name: 'Mirza Qamaruzzaman',
     title: 'Frontend Engineer',
-    level: 35,
+    level: calcLevel(mirzaSkills.length, mirzaExp),
     image: '/assets/images/mentor/mirza.png',
-    bio: 'Fullstack engineer dengan spesialisasi di bidang Frontend Web Development. Pengalaman lebih dari 2 tahun di industri tech dengan berbagai tech stack modern seperti Next.js, Laravel, PostgreSQL, dll.',
-    skills: ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Vue.js', 'Nuxt.js', 'Redis', 'Pinia', 'Typescript', 'Zustand', 'Redux', 'SQlite', 'MySQL', 'MongoDB', 'Express', 'NestJS', 'Code Igniter', 'Postman', 'Git', 'GitHub', 'GitLab', 'Figma', 'JWT Auth', 'OAuth'],
+    bio: `Fullstack engineer dengan spesialisasi di bidang Frontend Web Development. Pengalaman lebih dari ${mirzaExp} tahun di industri tech dengan berbagai tech stack modern seperti Next.js, Laravel, PostgreSQL, dll.`,
+    skills: mirzaSkills,
     stats: [
-      { label: 'EXP (Experience)', valueText: '2+ Tahun', percent: 50, color: '#52e0a8' },
-      { label: 'MANA (Knowledge)', valueText: '25+ Tech Stack', percent: 95, color: '#7c9bff' },
-      { label: 'HP (Style)', valueText: 'Hands-on & Sabar', color: '#ff5d73', isBadge: true },
+      { label: 'EXP (Experience)', valueText: `${mirzaExp}+ Tahun`, percent: Math.round((mirzaExp / maxExp) * 100), color: '#52e0a8' },
+      { label: 'MANA (Knowledge)', valueText: `${mirzaSkills.length}+ Tech Stack`, percent: Math.round((mirzaSkills.length / totalUniqueSkills) * 100), color: '#7c9bff' }
     ],
   },
   {
     id: 'MENTOR_02',
     name: 'Rio Andrianto S.Kom.',
     title: 'Fullstack Engineer, Embedded Systems Engineer',
-    level: 52,
+    level: calcLevel(rioSkills.length, rioExp),
     image: '/assets/images/mentor/rio.png',
-    bio: 'Fullstack engineer dengan pengalaman lebih dari 5 tahun di industri tech. Spesialisasi di React, Next.js, Laravel, Arsitektur Backend Modern dan Embedded Systems. Berpengalaman membangun berbagai project nyata, termasuk IoT dan sistem otomasi.',
-    skills: ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Docker', 'IOT Stack', 'Arduino', 'ESP32'],
+    bio: `Fullstack engineer dengan pengalaman lebih dari ${rioExp} tahun di industri tech. Spesialisasi di React, Next.js, Laravel, Arsitektur Backend Modern dan Embedded Systems. Berpengalaman membangun berbagai project nyata, termasuk IoT dan sistem otomasi.`,
+    skills: rioSkills,
     stats: [
-      { label: 'EXP (Experience)', valueText: '5+ Tahun', percent: 85, color: '#52e0a8' },
-      { label: 'MANA (Knowledge)', valueText: '12+ Tech Stack', percent: 90, color: '#7c9bff' },
-      { label: 'HP (Style)', valueText: 'Hands-on & Sabar', color: '#ff5d73', isBadge: true },
+      { label: 'EXP (Experience)', valueText: `${rioExp}+ Tahun`, percent: Math.round((rioExp / maxExp) * 100), color: '#52e0a8' },
+      { label: 'MANA (Knowledge)', valueText: `${rioSkills.length}+ Tech Stack`, percent: Math.round((rioSkills.length / totalUniqueSkills) * 100), color: '#7c9bff' }
     ],
   },
 ];
 
 export const values: CoreValue[] = [
   {
-    icon: <FiCode className="text-[28px] md:text-[32px] text-xp mb-[16px] md:mb-[20px]" />,
+    icon: <FiCode className="text-[28px] md:text-[32px] text-xp" />,
     title: 'Belajar = Ngoding Langsung',
     description: 'Tidak sekadar menonton video. Kamu coding, kamu dibimbing, kamu naik level beneran.',
   },
   {
-    icon: <FiUserCheck className="text-[28px] md:text-[32px] text-xp mb-[16px] md:mb-[20px]" />,
+    icon: <FiUserCheck className="text-[28px] md:text-[32px] text-xp" />,
     title: 'Mentor Beneran, Bukan Bot',
     description: 'Semua mentor punya pengalaman industri nyata. Bukan yang cuma baca slide presentasi.',
   },
   {
-    icon: <FiTarget className="text-[28px] md:text-[32px] text-xp mb-[16px] md:mb-[20px]" />,
+    icon: <FiTarget className="text-[28px] md:text-[32px] text-xp" />,
     title: 'Kurikulum yang Jelas',
     description: 'Setiap quest memiliki learning path yang terstruktur. Kamu tahu persis progress belajarmu di mana.',
   },
   {
-    icon: <FiAward className="text-[28px] md:text-[32px] text-xp mb-[16px] md:mb-[20px]" />,
+    icon: <FiAward className="text-[28px] md:text-[32px] text-xp" />,
     title: 'Goal-nya: Kamu Siap Kerja',
     description: 'Bukan sekadar bisa membuat TODO app. Tapi bisa membangun project nyata dan siap interview.',
   },

@@ -2,11 +2,15 @@ import MentorCarousel from '@/components/modules/MentorCarousel'
 import TestimonialCarousel from '@/components/modules/TestimonialCarousel'
 import Link from 'next/link'
 import HomeImage from '@/components/shared/HomeImage'
-import { courses, learningPackages, blogs, WHATSAPP_NUMBER } from '@/constants'
+import { courses, learningPackages, blogs, WHATSAPP_NUMBER, mentors } from '@/constants'
 
 export default function Home() {
   const playerTamat = "120+";
-  const ratingMentor = "4.9";
+  
+  // Kalkulasi rating 1-10 dari rata-rata level mentor
+  const avgLevel = mentors.reduce((acc, m) => acc + m.level, 0) / (mentors.length || 1);
+  const ratingMentor = Math.min(10, (avgLevel * 0.15) + 3).toFixed(1); // Contoh formula dinamis
+  
   const skillTree = courses.length;
 
   return (
@@ -202,6 +206,7 @@ export default function Home() {
             )}
           </div>
         </section>
+
         {/* Blog / Artikel */}
         <section className="py-[80px]" id="blog" aria-label="Artikel Terbaru">
           <div className="max-w-[1120px] mx-auto px-6">
