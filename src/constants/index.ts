@@ -295,9 +295,9 @@ export const learningPackages: LearningPackage[] = [
 
 export const devServices: DevService[] = [
   {
-    slug: 'jasa-dev-web',
+    slug: 'web-development',
     icon: '💻',
-    title: 'Jasa Dev Web',
+    title: 'Web Development',
     description: 'Pembuatan website dari nol sesuai kebutuhan. Dari landing page sampai web app kompleks.',
     features: [
       'Custom Design (bukan template)',
@@ -310,9 +310,9 @@ export const devServices: DevService[] = [
     duration: '3–14 hari kerja',
   },
   {
-    slug: 'joki-web',
+    slug: 'web-freelance',
     icon: '🚀',
-    title: 'Joki Web',
+    title: 'Web Freelance / Jockey',
     description: 'Bantuan pengerjaan tugas kuliah, skripsi, atau project deadline mepet.',
     features: [
       'Pengerjaan Super Cepat',
@@ -326,9 +326,9 @@ export const devServices: DevService[] = [
     isPopular: true,
   },
   {
-    slug: 'pinjam-programmer',
+    slug: 'hire-programmer',
     icon: '👨‍💻',
-    title: 'Pinjam Programmer',
+    title: 'Hire a Programmer',
     description: 'Sewa programmer part-time atau full-time untuk kembangkan project tim/bisnis kamu.',
     features: [
       'Skill Terjamin & Siap Kerja',
@@ -371,9 +371,9 @@ export const NAV_LINKS: NavLink[] = [
     href: '#',
     label: 'Services',
     children: [
-      { href: '/jasa-dev', label: 'Jasa Dev Web' },
-      { href: '/jasa-dev#joki-web', label: 'Joki Web' },
-      { href: '/jasa-dev#pinjam-programmer', label: 'Pinjam Programmer' },
+      { href: '/jasa-dev', label: 'Web Development' },
+      { href: '/jasa-dev#web-freelance', label: 'Web Freelance' },
+      { href: '/jasa-dev#hire-programmer', label: 'Hire a Programmer' },
     ],
   },
   { href: '/about', label: 'About' },

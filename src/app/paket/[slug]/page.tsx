@@ -28,8 +28,11 @@ export default async function PaketDetailPage({ params }: Props) {
   if (!pkg) notFound()
 
   const pkgCourses = pkg.courseSlugs.map(s => courses.find(c => c.slug === s)).filter(Boolean)
-  const savings = pkg.originalPrice - pkg.price
-  const savingsPercent = Math.round((savings / pkg.originalPrice) * 100)
+  
+  // Calculate total original price from courses
+  const totalOriginalPrice = pkgCourses.reduce((sum, c) => sum + (c?.originalPrice || c?.price || 0), 0) || pkg.originalPrice
+  const savings = totalOriginalPrice > pkg.price ? totalOriginalPrice - pkg.price : 0
+  const savingsPercent = totalOriginalPrice > 0 ? Math.round((savings / totalOriginalPrice) * 100) : 0
 
   const waText = encodeURIComponent(
     `Halo Teman Ngoding! Saya tertarik untuk mendaftar ${pkg.title}. Boleh info lebih lanjut?`
@@ -52,8 +55,20 @@ export default async function PaketDetailPage({ params }: Props) {
           </div>
         </div>
 
+        {/* Image Header Banner */}
+        <header className="pt-[40px] pb-[40px]">
+          <div className="max-w-[1120px] mx-auto px-6">
+            <div className="w-full h-[300px] md:h-[400px] lg:h-[500px] border-2 border-line relative overflow-hidden bg-bg-deep rounded-sm">
+              <ImageWithSkeleton src={pkg.image || ''} alt={pkg.title} fill className="object-cover" fallbackIcon={pkg.icon} />
+              <div className="absolute top-[20px] left-[20px] w-[56px] h-[56px] flex items-center justify-center bg-bg-deep/90 backdrop-blur-sm border border-line-bright text-[28px] shadow-[4px_4px_0_rgba(0,0,0,0.6)]">
+                {pkg.icon}
+              </div>
+            </div>
+          </div>
+        </header>
+
         {/* Hero */}
-        <header className="pb-[40px]">
+        <section className="pb-[40px]">
           <div className="max-w-[1120px] mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-[40px] items-start">
 
@@ -128,7 +143,7 @@ export default async function PaketDetailPage({ params }: Props) {
                   Rp{pkg.price.toLocaleString('id-ID')}
                 </div>
                 <div className="font-mono text-[12px] text-text-dim line-through mb-[4px]">
-                  Rp{pkg.originalPrice.toLocaleString('id-ID')} (harga satuan)
+                  Rp{totalOriginalPrice.toLocaleString('id-ID')} (harga satuan)
                 </div>
                 <div className="font-mono text-[12px] text-hp mb-[20px]">
                   Hemat Rp{savings.toLocaleString('id-ID')} ({savingsPercent}%)
@@ -161,7 +176,7 @@ export default async function PaketDetailPage({ params }: Props) {
               </div>
             </div>
           </div>
-        </header>
+        </section>
 
         {/* Learning Path */}
         <section className="py-[80px]" aria-label="Learning Path">
@@ -193,7 +208,7 @@ export default async function PaketDetailPage({ params }: Props) {
                     >
                       {/* Image */}
                       <div className="w-full md:w-[120px] md:h-[80px] aspect-4/3 md:aspect-auto relative border border-line overflow-hidden bg-bg-deep shrink-0">
-                        <ImageWithSkeleton src={course.image} alt={course.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <ImageWithSkeleton src={course.image} alt={course.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" fallbackIcon={course.icon} />
                       </div>
 
                       <div className="flex-1 min-w-0">

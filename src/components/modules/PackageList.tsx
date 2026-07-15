@@ -1,9 +1,33 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { CourseData, LearningPackage } from '@/types';
 import { WHATSAPP_NUMBER } from '@/constants';
+import { FiSearch, FiFilter, FiChevronLeft, FiChevronRight, FiPackage, FiImage } from 'react-icons/fi';
+
+function PackageImage({ pkg }: { pkg: LearningPackage }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (!pkg.image || hasError) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-bg-deep">
+        <FiImage className="text-[48px] text-line-bright" />
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      src={pkg.image}
+      alt={pkg.title}
+      fill
+      className="object-cover transition-transform duration-500 group-hover:scale-105"
+      onError={() => setHasError(true)}
+    />
+  );
+}
 
 export default function PackageList({ packages, courses }: { packages: LearningPackage[], courses: CourseData[] }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,7 +37,7 @@ export default function PackageList({ packages, courses }: { packages: LearningP
 
   const filteredPackages = useMemo(() => {
     return packages.filter((pkg) => {
-      const matchesSearch = pkg.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      const matchesSearch = pkg.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             pkg.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesDifficulty = difficultyFilter === 'ALL' || pkg.difficulty === difficultyFilter;
       return matchesSearch && matchesDifficulty;
@@ -27,26 +51,41 @@ export default function PackageList({ packages, courses }: { packages: LearningP
   );
 
   // Reset to page 1 when filters change
-  useMemo(() => setCurrentPage(1), [searchQuery, difficultyFilter]);
+  useEffect(() => { setCurrentPage(1); }, [searchQuery, difficultyFilter]);
+
+  // No packages at all
+  if (packages.length === 0) {
+    return (
+      <div className="text-center py-24 border-2 border-dashed border-line bg-bg-deep">
+        <FiPackage className="mx-auto text-[48px] text-line-bright mb-6" />
+        <h3 className="font-pixel text-[16px] text-text-main mb-3">Belum Ada Paket</h3>
+        <p className="font-mono text-[13px] text-text-dim max-w-[400px] mx-auto">
+          Paket belajar sedang dalam persiapan. Stay tuned untuk update terbaru!
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div>
       {/* Controls */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
         <div className="flex-1 relative">
+          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-text-dim text-[16px]" />
           <input
             type="text"
             placeholder="Cari paket..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-bg-deep border-2 border-line text-text-main px-4 py-3 font-mono text-[13px] focus:outline-none focus:border-mana placeholder:text-text-dim"
+            className="w-full bg-bg-deep border-2 border-line text-text-main pl-11 pr-4 py-3 font-mono text-[13px] focus:outline-none focus:border-mana placeholder:text-text-dim transition-colors"
           />
         </div>
-        <div className="w-full md:w-[200px]">
+        <div className="w-full md:w-[200px] relative">
+          <FiFilter className="absolute left-4 top-1/2 -translate-y-1/2 text-text-dim text-[14px]" />
           <select
             value={difficultyFilter}
             onChange={(e) => setDifficultyFilter(e.target.value)}
-            className="w-full bg-bg-deep border-2 border-line text-text-main px-4 py-3 font-mono text-[13px] focus:outline-none focus:border-mana appearance-none"
+            className="w-full bg-bg-deep border-2 border-line text-text-main pl-11 pr-4 py-3 font-mono text-[13px] focus:outline-none focus:border-mana appearance-none cursor-pointer transition-colors"
           >
             <option value="ALL">Semua Level</option>
             <option value="EASY">EASY</option>
@@ -56,154 +95,126 @@ export default function PackageList({ packages, courses }: { packages: LearningP
         </div>
       </div>
 
-      {/* Grid */}
+      {/* Grid — same card style as CourseList */}
       {currentPackages.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px]">
           {currentPackages.map((pkg) => {
-            const pkgCourses = pkg.courseSlugs.map(s => courses.find(c => c.slug === s)).filter(Boolean);
-            const savings = pkg.originalPrice - pkg.price;
-            const savingsPercent = Math.round((savings / pkg.originalPrice) * 100);
+            const pkgCourses = pkg.courseSlugs.map(s => courses.find(c => c.slug === s)).filter(Boolean) as CourseData[];
+            const totalOriginalPrice = pkgCourses.reduce((sum, c) => sum + (c.originalPrice || c.price || 0), 0) || pkg.originalPrice;
+            const savings = totalOriginalPrice > pkg.price ? totalOriginalPrice - pkg.price : 0;
+            const savingsPercent = totalOriginalPrice > 0 ? Math.round((savings / totalOriginalPrice) * 100) : 0;
 
             return (
-              <article
+              <Link
+                href={`/paket/${pkg.slug}`}
                 key={pkg.slug}
-                className={`bg-bg-panel flex flex-col relative transition-all hover:-translate-y-1 ${pkg.isPopular
-                  ? 'border-2 border-gold shadow-[0_0_0_1px_#ffc857,4px_4px_0_#000]'
-                  : 'border-2 border-line hover:border-line-bright'
-                  }`}
+                className="bg-bg-panel border-2 border-line transition-all hover:border-mana hover:bg-bg-panel-2 group relative flex flex-col cursor-pointer"
               >
-                {pkg.isPopular && (
-                  <div className="absolute top-[-12px] right-[16px] bg-gold text-[#1a1300] font-mono text-[10px] font-bold px-[10px] py-[4px]">
-                    PALING LARIS
+                {/* Image */}
+                <div className="w-full aspect-4/3 border-b-2 border-line relative overflow-hidden bg-bg-deep group-hover:border-line-bright transition-colors">
+                  <PackageImage pkg={pkg} />
+                  <div className="absolute top-[16px] left-[16px] w-[36px] h-[36px] flex items-center justify-center bg-bg-deep/80 backdrop-blur-sm border border-line-bright text-[16px] shadow-[3px_3px_0_rgba(0,0,0,0.5)]">
+                    {pkg.icon}
                   </div>
-                )}
-                {savingsPercent >= 30 && (
-                  <div className="absolute top-[-12px] left-[16px] bg-hp text-white font-mono text-[10px] font-bold px-[10px] py-[4px]">
-                    HEMAT {savingsPercent}%
-                  </div>
-                )}
+                  {pkg.isPopular && (
+                    <div className="absolute top-[16px] right-[16px] bg-gold text-[#1a1300] font-mono text-[10px] font-bold px-[10px] py-[4px]">
+                      PALING LARIS
+                    </div>
+                  )}
+                  {savingsPercent >= 30 && (
+                    <div className="absolute bottom-[16px] left-[16px] bg-hp text-white font-mono text-[10px] font-bold px-[10px] py-[4px]">
+                      HEMAT {savingsPercent}%
+                    </div>
+                  )}
+                </div>
 
-                <div className="p-[24px] flex flex-col flex-1">
-                  {/* Icon & Level */}
-                  <div className="flex items-center justify-between mb-[16px]">
-                    <div className="text-[36px]">{pkg.icon}</div>
-                    <div className="flex items-center gap-[8px]">
-                      <span className="font-pixel text-[9px] text-text-dim">LV.{pkg.level}</span>
-                      <span
-                        className="font-mono text-[10px] px-[8px] py-[3px] border"
-                        style={{ borderColor: pkg.difficultyColor, color: pkg.difficultyColor }}
-                      >
-                        {pkg.difficulty}
-                      </span>
+                {/* Content */}
+                <div className="p-[20px] flex flex-col flex-1">
+                  <div className="flex items-start gap-[12px] mb-[12px]">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-[8px] flex-wrap mb-[4px]">
+                        <span className="font-pixel text-[10px] text-text-dim">LV.{pkg.level}</span>
+                        <h2 className="font-semibold text-[15px] text-text-main leading-tight">{pkg.title}</h2>
+                        <span
+                          className="font-mono text-[10px] px-[6px] py-[2px] border whitespace-nowrap"
+                          style={{ borderColor: pkg.difficultyColor, color: pkg.difficultyColor }}
+                        >
+                          {pkg.difficulty}
+                        </span>
+                      </div>
+                      <p className="font-mono text-[11px] text-mana mb-[4px]">{pkg.tagline}</p>
+                      <p className="font-mono text-[11px] text-text-dim">{pkg.courseSlugs.length} Quest · +{pkg.totalXP} XP</p>
                     </div>
                   </div>
 
-                  {/* Title */}
-                  <h2 className="font-semibold text-[18px] text-text-main mb-[4px]">{pkg.title}</h2>
-                  <p className="font-mono text-[12px] text-mana mb-[12px]">{pkg.tagline}</p>
-                  <p className="text-[13px] text-text-dim leading-[1.65] mb-[16px]">{pkg.description}</p>
+                  {pkg.highlights && pkg.highlights.length > 0 && (
+                    <div className="mb-[12px]">
+                      <div className="font-mono text-[10px] text-xp mb-[6px] uppercase tracking-[1px]">Highlight</div>
+                      <ul className="text-[12px] text-text-dim flex flex-col gap-[4px]">
+                        {pkg.highlights.slice(0, 3).map((pt, i) => (
+                          <li key={i} className="flex gap-[6px] before:content-['▸'] before:text-xp line-clamp-1">{pt}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
-                  {/* Quest List */}
                   <div className="mb-[16px]">
-                    <div className="font-mono text-[10px] text-xp mb-[8px] uppercase tracking-[1px]">Quest dalam Paket ini</div>
-                    <div className="flex flex-col gap-[6px]">
-                      {pkgCourses.map((c, idx) => c && (
-                        <div key={c.slug} className="flex items-center gap-[10px] bg-bg-deep border border-line px-[12px] py-[8px]">
-                          <span className="font-pixel text-[9px] text-line-bright">{String(idx + 1).padStart(2, '0')}</span>
-                          <span className="text-[14px]">{c.icon}</span>
-                          <span className="font-mono text-[11px] text-text-main flex-1">{c.title}</span>
-                          <span className="font-mono text-[10px] text-gold">+{c.xp}XP</span>
-                        </div>
-                      ))}
+                    <div className="font-mono text-[10px] text-mana mb-[6px] uppercase tracking-[1px]">Harga</div>
+                    <div className="flex items-end gap-[8px]">
+                      <span className="font-mono text-[18px] text-xp font-bold leading-none">Rp{pkg.price.toLocaleString('id-ID')}</span>
+                      <span className="font-mono text-[11px] text-text-dim line-through mb-[2px]">Rp{totalOriginalPrice.toLocaleString('id-ID')}</span>
                     </div>
                   </div>
 
-                  {/* Stats */}
-                  <div className="flex gap-[16px] mb-[20px]">
-                    <div className="font-mono text-center">
-                      <div className="text-[16px] font-bold text-gold">{pkg.totalSessions}</div>
-                      <div className="text-[9px] text-text-dim uppercase">Sesi</div>
-                    </div>
-                    <div className="font-mono text-center">
-                      <div className="text-[16px] font-bold text-xp">+{pkg.totalXP}</div>
-                      <div className="text-[9px] text-text-dim uppercase">Total XP</div>
-                    </div>
-                    <div className="font-mono text-center">
-                      <div className="text-[16px] font-bold text-mana">{pkg.courseSlugs.length}</div>
-                      <div className="text-[9px] text-text-dim uppercase">Quest</div>
-                    </div>
-                  </div>
-
-                  {/* Highlights */}
-                  <ul className="flex flex-col gap-[6px] mb-[20px]">
-                    {pkg.highlights.map((h, i) => (
-                      <li key={i} className="flex gap-[8px] text-[12px] text-text-dim before:content-['▸'] before:text-xp">
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Price */}
                   <div className="mt-auto">
-                    <div className="font-mono text-[26px] text-xp font-bold">
-                      Rp{pkg.price.toLocaleString('id-ID')}
-                      <span className="text-[12px] text-text-dim"> /paket</span>
-                    </div>
-                    <div className="font-mono text-[12px] text-text-dim line-through mb-[16px]">
-                      Rp{pkg.originalPrice.toLocaleString('id-ID')}
-                    </div>
-
-                    {/* CTA Buttons */}
-                    <div className="flex flex-col gap-[8px]">
-                      <Link
-                        href={`/paket/${pkg.slug}`}
-                        className={`flex justify-center font-mono font-semibold text-[13px] px-[20px] py-[12px] border-2 border-black shadow-[4px_4px_0_#000] cursor-pointer transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#000] w-full ${pkg.isPopular
-                          ? 'bg-xp text-[#04140d]'
-                          : 'bg-bg-panel text-text-main border-line-bright'
-                          }`}
-                      >
-                        LIHAT DETAIL
-                      </Link>
-                      <a
-                        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Halo Teman Ngoding! Saya tertarik mendaftar ${pkg.title}. Boleh info lebih lanjut?`)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex justify-center font-mono text-[12px] px-[20px] py-[10px] border border-line text-text-dim hover:border-xp hover:text-xp transition-colors w-full"
-                      >
-                        💬 Daftar via WhatsApp
-                      </a>
+                    <div className="mt-[12px] flex justify-end">
+                      <span className="font-mono text-[11px] text-mana group-hover:underline">Detail →</span>
                     </div>
                   </div>
                 </div>
-              </article>
+              </Link>
             );
           })}
         </div>
       ) : (
-        <div className="text-center py-16 font-mono text-text-dim border-2 border-line bg-bg-deep">
-          Tidak ada paket yang cocok dengan filter.
+        <div className="text-center py-20 border-2 border-dashed border-line bg-bg-deep">
+          <FiSearch className="mx-auto text-[40px] text-line-bright mb-4" />
+          <h3 className="font-pixel text-[14px] text-text-main mb-2">Paket Tidak Ditemukan</h3>
+          <p className="font-mono text-[12px] text-text-dim">
+            Coba ubah kata kunci atau filter level kamu.
+          </p>
         </div>
       )}
 
       {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-4 mt-[40px]">
+      {totalPages > 0 && (
+        <div className="flex justify-center items-center gap-2 mt-[40px]">
           <button
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="font-mono text-[12px] px-[16px] py-[8px] border-2 border-line disabled:opacity-50 disabled:cursor-not-allowed hover:bg-bg-panel-2 transition-colors"
+            className="font-mono text-[12px] px-[12px] py-[8px] border-2 border-line disabled:opacity-30 disabled:cursor-not-allowed hover:bg-bg-panel-2 hover:border-line-bright transition-colors flex items-center gap-1"
           >
-            ← Prev
+            <FiChevronLeft /> Prev
           </button>
-          <span className="font-mono text-[12px] text-text-dim">
-            Page {currentPage} of {totalPages}
-          </span>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`font-mono text-[12px] w-[36px] h-[36px] border-2 transition-colors ${
+                currentPage === page
+                  ? 'border-mana bg-mana/10 text-mana'
+                  : 'border-line hover:border-line-bright hover:bg-bg-panel-2 text-text-dim'
+              }`}
+            >
+              {page}
+            </button>
+          ))}
           <button
             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="font-mono text-[12px] px-[16px] py-[8px] border-2 border-line disabled:opacity-50 disabled:cursor-not-allowed hover:bg-bg-panel-2 transition-colors"
+            className="font-mono text-[12px] px-[12px] py-[8px] border-2 border-line disabled:opacity-30 disabled:cursor-not-allowed hover:bg-bg-panel-2 hover:border-line-bright transition-colors flex items-center gap-1"
           >
-            Next →
+            Next <FiChevronRight />
           </button>
         </div>
       )}

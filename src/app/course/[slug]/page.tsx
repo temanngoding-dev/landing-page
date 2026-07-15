@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton'
+import SyllabusButton from '@/components/shared/SyllabusButton'
 import { courses, learningPackages, WHATSAPP_NUMBER } from '@/constants'
 
 type Props = {
@@ -57,7 +58,7 @@ export default async function CourseDetailPage({ params }: Props) {
         <header className="pt-[40px] pb-[40px]">
           <div className="max-w-[1120px] mx-auto px-6">
             <div className="w-full h-[300px] md:h-[400px] lg:h-[500px] border-2 border-line relative overflow-hidden bg-bg-deep rounded-sm">
-              <ImageWithSkeleton src={course.image} alt={course.title} fill className="object-cover" />
+              <ImageWithSkeleton src={course.image} alt={course.title} fill className="object-cover" fallbackIcon={course.icon} />
               <div className="absolute top-[20px] left-[20px] w-[56px] h-[56px] flex items-center justify-center bg-bg-deep/90 backdrop-blur-sm border border-line-bright text-[28px] shadow-[4px_4px_0_rgba(0,0,0,0.6)]">
                 {course.icon}
               </div>
@@ -68,7 +69,7 @@ export default async function CourseDetailPage({ params }: Props) {
         {/* Content Section */}
         <section className="pb-[80px]">
           <div className="max-w-[1120px] mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-[60px] items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-[40px] lg:gap-[60px] items-start">
               
               {/* Left — Info */}
               <div>
@@ -85,66 +86,48 @@ export default async function CourseDetailPage({ params }: Props) {
                   </span>
                 </div>
 
-                <h1 className="font-pixel text-[24px] md:text-[32px] leading-[1.5] mb-[20px] text-text-main">
+                <h1 className="font-pixel text-[22px] md:text-[32px] leading-[1.5] mb-[20px] text-text-main">
                   {course.title}
                 </h1>
 
-                <p className="text-[16px] md:text-[18px] text-text-dim leading-[1.8] mb-[32px] font-medium">
+                <p className="text-[15px] md:text-[18px] text-text-dim leading-[1.8] mb-[32px] font-medium">
                   {course.longDescription || course.description}
                 </p>
 
                 {/* Syllabus Button */}
-                {course.syllabusUrl && course.syllabusUrl !== '#' && (
-                  <div className="mb-[40px]">
-                    <a
-                      href={course.syllabusUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 font-mono text-[14px] text-xp border border-xp px-[20px] py-[10px] hover:bg-xp/10 transition-colors"
-                    >
-                      📄 LIHAT SILABUS LENGKAP
-                    </a>
-                  </div>
-                )}
-                {course.syllabusUrl === '#' && (
-                  <div className="mb-[40px]">
-                    <button
-                      className="inline-flex items-center gap-2 font-mono text-[14px] text-text-dim border border-line px-[20px] py-[10px] cursor-not-allowed"
-                      title="Silabus sedang dalam penyusunan"
-                    >
-                      📄 SILABUS SEGERA HADIR
-                    </button>
-                  </div>
-                )}
+                <SyllabusButton
+                  syllabusUrl={course.syllabusUrl || ''}
+                  courseTitle={course.title}
+                />
 
                 {/* Stats Row */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-[24px] mb-[40px] p-[24px] bg-bg-panel border border-line">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-[16px] md:gap-[24px] mb-[40px] p-[20px] md:p-[24px] bg-bg-panel border border-line">
                   <div className="font-mono">
-                    <div className="text-[24px] font-bold text-gold">{course.sessions}</div>
-                    <div className="text-[11px] text-text-dim uppercase tracking-[1px] mt-1">Total Sesi</div>
+                    <div className="text-[22px] md:text-[24px] font-bold text-gold">{course.sessions}</div>
+                    <div className="text-[10px] text-text-dim uppercase tracking-[1px] mt-1">Total Sesi</div>
                   </div>
                   <div className="font-mono">
-                    <div className="text-[24px] font-bold text-xp">+{course.xp}</div>
-                    <div className="text-[11px] text-text-dim uppercase tracking-[1px] mt-1">XP Reward</div>
+                    <div className="text-[22px] md:text-[24px] font-bold text-xp">+{course.xp}</div>
+                    <div className="text-[10px] text-text-dim uppercase tracking-[1px] mt-1">XP Reward</div>
                   </div>
                   <div className="font-mono">
-                    <div className="text-[24px] font-bold text-mana">120'</div>
-                    <div className="text-[11px] text-text-dim uppercase tracking-[1px] mt-1">Per Sesi</div>
+                    <div className="text-[22px] md:text-[24px] font-bold text-mana">120'</div>
+                    <div className="text-[10px] text-text-dim uppercase tracking-[1px] mt-1">Per Sesi</div>
                   </div>
                   <div className="font-mono">
-                    <div className="text-[24px] font-bold text-hp">1-on-1</div>
-                    <div className="text-[11px] text-text-dim uppercase tracking-[1px] mt-1">Format</div>
+                    <div className="text-[22px] md:text-[24px] font-bold text-hp">1-on-1</div>
+                    <div className="text-[10px] text-text-dim uppercase tracking-[1px] mt-1">Format</div>
                   </div>
                 </div>
 
                 {/* Topics */}
                 <div className="mb-[40px]">
                   <div className="font-mono text-[13px] text-mana mb-[16px] uppercase tracking-[1.5px]">// Materi yang Dipelajari</div>
-                  <div className="flex flex-wrap gap-[10px]">
+                  <div className="flex flex-wrap gap-[8px] md:gap-[10px]">
                     {course.topics.filter(t => t).map((topic) => (
                       <span
                         key={topic}
-                        className="font-mono text-[13px] px-[14px] py-[8px] border border-line text-text-dim bg-bg-deep hover:border-mana hover:text-mana transition-colors"
+                        className="font-mono text-[12px] md:text-[13px] px-[12px] md:px-[14px] py-[6px] md:py-[8px] border border-line text-text-dim bg-bg-deep hover:border-mana hover:text-mana transition-colors"
                       >
                         {topic}
                       </span>
@@ -158,8 +141,8 @@ export default async function CourseDetailPage({ params }: Props) {
                     <div className="font-mono text-[13px] text-xp mb-[16px] uppercase tracking-[1.5px]">// Quest Ini Cocok Untuk Kamu Yang...</div>
                     <ul className="flex flex-col gap-[12px]">
                       {course.targetAudience.map((item, i) => (
-                        <li key={i} className="flex gap-[12px] text-[15px] text-text-dim leading-[1.6]">
-                          <span className="text-xp mt-[2px]">▸</span>
+                        <li key={i} className="flex gap-[12px] text-[14px] md:text-[15px] text-text-dim leading-[1.6]">
+                          <span className="text-xp mt-[2px] shrink-0">▸</span>
                           {item}
                         </li>
                       ))}
@@ -168,26 +151,26 @@ export default async function CourseDetailPage({ params }: Props) {
                 )}
               </div>
 
-              {/* Right — CTA Card */}
-              <div className="sticky top-[120px]">
-                <div className="bg-bg-panel border-2 border-line p-[32px]">
+              {/* Right — CTA Card (sticky on desktop, normal on mobile) */}
+              <div className="lg:sticky lg:top-[120px]">
+                <div className="bg-bg-panel border-2 border-line p-[24px] md:p-[32px]">
                   <div className="font-mono text-[12px] text-text-dim mb-[8px] uppercase tracking-[1px]">Harga per Paket</div>
                   {course.price && (
                     <>
-                      <div className="font-mono text-[36px] text-xp font-bold mb-[4px]">
+                      <div className="font-mono text-[32px] md:text-[36px] text-xp font-bold mb-[4px]">
                         Rp{course.price.toLocaleString('id-ID')}
                       </div>
-                      {course.originalPrice && (
-                        <div className="font-mono text-[14px] text-text-dim line-through mb-[24px]">
+                      {course.originalPrice && course.originalPrice > course.price && (
+                        <div className="font-mono text-[13px] text-text-dim line-through mb-[24px]">
                           Rp{course.originalPrice.toLocaleString('id-ID')}
                         </div>
                       )}
                     </>
                   )}
 
-                  <ul className="flex flex-col gap-[12px] mb-[32px]">
+                  <ul className="flex flex-col gap-[10px] md:gap-[12px] mb-[28px] md:mb-[32px]">
                     {course.point.map((pt, i) => (
-                      <li key={i} className="flex gap-[12px] text-[14px] text-text-dim before:content-['▸'] before:text-xp leading-[1.5]">
+                      <li key={i} className="flex gap-[12px] text-[13px] md:text-[14px] text-text-dim before:content-['▸'] before:text-xp leading-[1.5] before:shrink-0">
                         {pt}
                       </li>
                     ))}
@@ -197,7 +180,7 @@ export default async function CourseDetailPage({ params }: Props) {
                     href={`https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex justify-center font-mono font-semibold text-[15px] px-[24px] py-[16px] border-2 border-black shadow-[4px_4px_0_#000] cursor-pointer transition-all bg-xp text-[#04140d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#000] w-full mb-[16px]"
+                    className="flex justify-center font-mono font-semibold text-[14px] md:text-[15px] px-[24px] py-[14px] md:py-[16px] border-2 border-black shadow-[4px_4px_0_#000] cursor-pointer transition-all bg-xp text-[#04140d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#000] w-full mb-[14px] md:mb-[16px]"
                   >
                     ▶ DAFTAR QUEST INI
                   </a>
@@ -205,7 +188,7 @@ export default async function CourseDetailPage({ params }: Props) {
                     href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Halo Teman Ngoding! Saya ingin konsultasi dulu sebelum daftar.')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex justify-center font-mono text-[14px] px-[24px] py-[14px] border-2 border-line-bright text-text-main hover:border-xp hover:text-xp transition-colors w-full bg-bg-deep"
+                    className="flex justify-center font-mono text-[13px] md:text-[14px] px-[24px] py-[12px] md:py-[14px] border-2 border-line-bright text-text-main hover:border-xp hover:text-xp transition-colors w-full bg-bg-deep"
                   >
                     💬 Konsultasi Dulu
                   </a>
