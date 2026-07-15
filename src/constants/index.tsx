@@ -1,14 +1,15 @@
 import React from 'react';
-import { 
-  FiCode, 
-  FiUserCheck, 
-  FiTarget, 
-  FiAward, 
-  FiGlobe, 
-  FiMonitor, 
-  FiInstagram, 
-  FiYoutube, 
-  FiGithub 
+import {
+  FiCode,
+  FiUserCheck,
+  FiTarget,
+  FiAward,
+  FiGlobe,
+  FiMonitor,
+  FiInstagram,
+  FiYoutube,
+  FiGithub,
+  FiCpu
 } from 'react-icons/fi';
 import { FaTiktok } from 'react-icons/fa';
 
@@ -46,7 +47,7 @@ export const mentors: MentorData[] = [
     level: 52,
     image: '/assets/images/mentor/rio.png',
     bio: 'Fullstack engineer dengan pengalaman lebih dari 5 tahun di industri tech. Spesialisasi di React, Next.js, Laravel, Arsitektur Backend Modern dan Embedded Systems. Berpengalaman membangun berbagai project nyata, termasuk IoT dan sistem otomasi.',
-    skills: ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Docker','IOT Stack', 'Arduino', 'ESP32'],
+    skills: ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Docker', 'IOT Stack', 'Arduino', 'ESP32'],
     stats: [
       { label: 'EXP (Experience)', valueText: '5+ Tahun', percent: 85, color: '#52e0a8' },
       { label: 'MANA (Knowledge)', valueText: '12+ Tech Stack', percent: 90, color: '#7c9bff' },
@@ -141,6 +142,40 @@ export const courses: CourseData[] = [
       'Pemula yang sudah menguasai HTML',
       'Pelajar SMA/SMK yang ingin upgrade skill CSS',
       'Siapapun yang ingin membuat website responsive dan interaktif',
+    ],
+  },
+  {
+    slug: 'fun-arduino-robotics',
+    icon: <FiCpu />,
+    image: '/assets/images/course/arduino.png',
+    packageName: 'Private 1-on-1',
+    title: 'Fun Arduino & Robotics',
+    description: 'Belajar dasar robotika lewat simulasi & praktik Arduino yang seru dan interaktif!',
+    longDescription: 'Bikin lampu otomatis sendiri? Atau alarm sensor gerak? Di quest ini, kamu bakal belajar dasar robotika dari nol tanpa perlu pusing rumus fisika yang rumit. Kita akan belajar cara kerja sensor, membuat kode logika sederhana, hingga merakit proyek hardware pertama kamu. Seru, penuh praktik, dan bikin kamu makin kreatif!',
+    syllabusUrl: '#',
+    topics: [
+      'Arduino Basics',
+      'Sensors & Actuators',
+      'Basic C++ for Arduino',
+      'Tinkercad/Wokwi Simulation',
+      'Smart Device Project'
+    ],
+    sessions: 4,
+    difficulty: 'EASY',
+    difficultyColor: '#52e0a8',
+    xp: 120,
+    level: 1,
+    price: 199999,
+    originalPrice: 299000,
+    point: [
+      'Total 4 Sesi (120 menit/sesi)',
+      'Simulasi Interaktif & Praktik Hardware',
+      'Project Keren (Smart Lamp / Alarm System)'
+    ],
+    targetAudience: [
+      'Anak SMP yang penasaran bagaimana robot dan teknologi bekerja',
+      'Pemula yang belum pernah menyentuh coding atau komponen elektronik',
+      'Anak kreatif yang suka mengulik dan membuat barang baru',
     ],
   },
 ];

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState, useCallback } from 'react'
 import { usePathname } from 'next/navigation'
 import { NAV_LINKS, ADDRESS, WHATSAPP_NUMBER, MAP_LAT, MAP_LNG, WHATSAPP_DISPLAY, EMAIL_ADDRESS, OPERATIONAL_HOURS } from '@/constants'
+import { FiMapPin, FiCopy, FiCheck, FiMail, FiPhone, FiClock } from 'react-icons/fi'
 import Modal from './Modal'
 
 export default function Footer() {
@@ -112,7 +113,7 @@ export default function Footer() {
               <div className="bg-bg-panel border-2 border-line p-[20px] flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-[8px] mb-[14px]">
-                    <span className="text-[18px]" aria-hidden="true">📍</span>
+                    <FiMapPin className="text-[16px] text-gold" aria-hidden="true" />
                     <span className="font-mono text-[11px] text-gold uppercase tracking-[1.5px] mb-[8px]">
                       HQ Location
                     </span>
@@ -128,12 +129,12 @@ export default function Footer() {
                 >
                   {copied ? (
                     <>
-                      <span className="text-xp">✓</span>
+                      <FiCheck className="text-xp text-[14px]" />
                       <span className="text-xp">COPIED!</span>
                     </>
                   ) : (
                     <>
-                      <span>📋</span>
+                      <FiCopy className="text-[14px]" />
                       <span>COPY ADDRESS</span>
                     </>
                   )}
@@ -212,7 +213,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col gap-[14px]">
               <div className="flex items-start gap-[10px]">
-                <span className="text-[14px] mt-[2px]" aria-hidden="true">📧</span>
+                <FiMail className="text-[14px] mt-[2px] text-mana" aria-hidden="true" />
                 <div>
                   <div className="text-[11px] text-text-dim font-mono mb-[2px]">Email</div>
                   <a href={`mailto:${EMAIL_ADDRESS}`} className="text-[13px] text-text-main hover:text-xp transition-colors">
@@ -221,7 +222,7 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-start gap-[10px]">
-                <span className="text-[14px] mt-[2px]" aria-hidden="true">📱</span>
+                <FiPhone className="text-[14px] mt-[2px] text-xp" aria-hidden="true" />
                 <div>
                   <div className="text-[11px] text-text-dim font-mono mb-[2px]">WhatsApp</div>
                   <a
@@ -235,7 +236,7 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-start gap-[10px]">
-                <span className="text-[14px] mt-[2px]" aria-hidden="true">🕐</span>
+                <FiClock className="text-[14px] mt-[2px] text-gold" aria-hidden="true" />
                 <div>
                   <div className="text-[11px] text-text-dim font-mono mb-[2px]">Jam Operasional</div>
                   <div className="flex flex-col gap-[2px]">

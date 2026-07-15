@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { courses } from '@/constants'
 import CourseList from '@/components/modules/CourseList'
+import { FiClipboard, FiMessageCircle, FiCode, FiAward, FiPackage } from 'react-icons/fi'
 
 export const metadata: Metadata = {
   title: 'All Courses',
@@ -30,7 +31,7 @@ export default function CoursePage() {
               href="/paket"
               className="inline-flex items-center gap-2 font-mono text-[13px] text-mana border border-mana px-[16px] py-[8px] bg-[rgba(124,155,255,0.06)] hover:bg-[rgba(124,155,255,0.12)] transition-colors"
             >
-              <span>📦</span> Lihat Paket Bundling — lebih hemat!
+              <FiPackage className="inline-block mr-2" /> Lihat Paket Bundling — lebih hemat!
             </Link>
           </div>
         </header>
@@ -51,17 +52,17 @@ export default function CoursePage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-[2px]">
               {[
-                { step: '01', icon: '📋', title: 'Pilih Quest', desc: 'Pilih course sesuai level dan minat kamu.' },
-                { step: '02', icon: '💬', title: 'Konsul Dulu', desc: 'Chat dulu dengan mentor untuk menentukan rencana belajar.' },
-                { step: '03', icon: '⚔️', title: 'Mulai Coding', desc: '1-on-1 private session, langsung praktik bersama mentor.' },
-                { step: '04', icon: '🏆', title: 'Level Up!', desc: 'Selesaikan quest, dapatkan XP, dan siap naik ke level berikutnya.' },
+                { step: '01', icon: <FiClipboard className="text-[28px] text-xp" />, title: 'Pilih Quest', desc: 'Pilih course sesuai level dan minat kamu.' },
+                { step: '02', icon: <FiMessageCircle className="text-[28px] text-mana" />, title: 'Konsul Dulu', desc: 'Chat dulu dengan mentor untuk menentukan rencana belajar.' },
+                { step: '03', icon: <FiCode className="text-[28px] text-hp" />, title: 'Mulai Coding', desc: '1-on-1 private session, langsung praktik bersama mentor.' },
+                { step: '04', icon: <FiAward className="text-[28px] text-gold" />, title: 'Level Up!', desc: 'Selesaikan quest, dapatkan XP, dan siap naik ke level berikutnya.' },
               ].map((item) => (
                 <article
                   key={item.step}
                   className="bg-bg-panel border border-line px-[20px] py-[24px] text-center transition-colors hover:border-line-bright hover:bg-bg-panel-2"
                 >
                   <div className="font-mono text-[10px] text-line-bright mb-[10px]">STEP_{item.step}</div>
-                  <div className="text-[28px] mb-[10px]" aria-hidden="true">{item.icon}</div>
+                  <div className="text-[28px] mb-[10px] flex justify-center" aria-hidden="true">{item.icon}</div>
                   <h3 className="font-semibold text-[14px] mb-[6px] text-text-main">{item.title}</h3>
                   <p className="font-mono text-[11px] text-text-dim leading-normal">{item.desc}</p>
                 </article>
@@ -79,7 +80,7 @@ export default function CoursePage() {
               href="/paket"
               className="font-mono font-semibold text-[14px] px-[24px] py-[14px] border-2 border-black shadow-[4px_4px_0_#000] cursor-pointer transition-all inline-flex items-center gap-[8px] bg-xp text-[#04140d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#000]"
             >
-              📦 LIHAT PAKET BUNDLING
+              <FiPackage className="inline-block mr-1" /> LIHAT PAKET BUNDLING
             </Link>
           </div>
         </section>
