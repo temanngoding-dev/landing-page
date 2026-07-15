@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface MentorStat {
   label: string;
   valueText: string;
@@ -20,14 +22,14 @@ export interface MentorData {
 }
 
 export interface CoreValue {
-  icon: string;
+  icon: ReactNode;
   title: string;
   description: string;
 }
 
 export interface CourseData {
   slug: string;
-  icon: string;
+  icon: ReactNode;
   image: string;
   packageName: string;
   title: string;
@@ -50,7 +52,7 @@ export interface LearningPackage {
   slug: string;
   title: string;
   tagline: string;
-  icon: string;
+  icon: ReactNode;
   image?: string;
   courseSlugs: string[]; // ordered list of course slugs
   totalSessions: number;
@@ -67,7 +69,7 @@ export interface LearningPackage {
 
 export interface DevService {
   slug: string;
-  icon: string;
+  icon: ReactNode;
   title: string;
   description: string;
   features: string[];
@@ -93,10 +95,20 @@ export interface NavLink {
 export interface SocialLink {
   label: string;
   href: string;
-  icon: string;
+  icon: ReactNode;
 }
 
 export interface LeadData {
   phone: string;
   timestamp: string;
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  author: string;
+  category: string;
+  image?: string;
 }
