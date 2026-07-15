@@ -1,0 +1,28 @@
+services:
+  web:
+    build: .
+    image: landing-temanngoding-dev:dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for live editing (HMR)
+      - .:/app
+      # Prevent host node_modules from overwriting the container's
+      - /app/node_modules
+      # Persist Next.js build cache across restarts
+      - nextjs_cache:/app/.next
+    env_file: .env.production
+    environment:
+      # Required for webpack polling — Docker volumes on Windows/Mac
+      # don't emit inotify/FSEvents so we poll instead
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=1000
+      - NODE_ENV=development
+    # Keep stdin open + allocate TTY so Ctrl+C / signals work properly
+    stdin_open: true
+    tty: true
+    command: npm run dev
+
+volumes:
+  nextjs_cache:

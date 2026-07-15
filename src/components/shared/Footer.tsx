@@ -186,7 +186,11 @@ export default function Footer() {
               Navigation
             </div>
             <nav className="flex flex-col gap-[10px]" aria-label="Footer Navigation">
-              {NAV_LINKS.map((link) => (
+              {NAV_LINKS.flatMap((link) =>
+                link.children && link.children.length > 0
+                  ? link.children
+                  : [link]
+              ).map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}

@@ -26,7 +26,7 @@ export default function AboutPage() {
               Your <span className="text-gold">Level Up</span>
             </h1>
             <p className="text-[16px] text-text-dim leading-[1.7] max-w-[600px] mx-auto">
-              Kami bukan platform course biasa. Kami adalah tim mentor yang beneran ngoding tiap hari dan passionate buat ngajarin lo jadi developer handal.
+              Kami bukan platform course biasa. Kami adalah tim mentor yang beneran ngoding tiap hari dan passionate untuk mengajari kamu menjadi developer handal.
             </p>
           </div>
         </header>
@@ -131,13 +131,13 @@ export default function AboutPage() {
               <h2 className="font-pixel text-[18px] leading-[1.6] mb-[20px]">Cerita Singkat</h2>
               <div className="text-[15px] text-text-dim leading-[1.8] max-w-[720px] space-y-4">
                 <p>
-                  temanngoding.id lahir dari satu frustrasi sederhana: kebanyakan course online di luar sana cuma bikin lo nonton, bukan ngoding.
+                  temanngoding.id lahir dari satu frustrasi sederhana: kebanyakan course online di luar sana cuma membuat kamu menonton, bukan ngoding.
                 </p>
                 <p>
-                  Kami percaya cara terbaik belajar coding itu kayak main game — ada quest yang jelas, ada mentor yang ngebimbing, ada progress yang keliatan, dan ada boss fight yang bikin lo grow.
+                  Kami percaya cara terbaik belajar coding itu seperti main game — ada quest yang jelas, ada mentor yang membimbing, ada progress yang terlihat, dan ada boss fight yang membuat kamu grow.
                 </p>
                 <p>
-                  Makanya kami bikin sistem belajar yang terstruktur tapi seru, dengan mentor yang beneran punya jam terbang di industri. Bukan sekadar platform, tapi teman belajar yang nemenin lo dari level 1 sampai job-ready.
+                  Makanya kami membuat sistem belajar yang terstruktur tapi seru, dengan mentor yang benar-benar punya jam terbang di industri. Bukan sekadar platform, tapi teman belajar yang menemani kamu dari level 1 sampai job-ready.
                 </p>
               </div>
             </div>

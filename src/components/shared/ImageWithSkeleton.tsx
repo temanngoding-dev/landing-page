@@ -2,9 +2,28 @@
 
 import { useState } from 'react'
 import Image, { ImageProps } from 'next/image'
+import { FiImage } from 'react-icons/fi'
 
-export default function ImageWithSkeleton({ className, alt, ...props }: ImageProps) {
+interface ImageWithSkeletonProps extends Omit<ImageProps, 'src'> {
+  src?: string | null
+  fallbackIcon?: React.ReactNode
+}
+
+export default function ImageWithSkeleton({ className, alt, fallbackIcon, src, ...props }: ImageWithSkeletonProps) {
   const [isLoaded, setIsLoaded] = useState(false)
+  const [hasError, setHasError] = useState(false)
+
+  if (!src || hasError) {
+    return (
+      <div className={`absolute inset-0 flex items-center justify-center bg-bg-deep ${className || ''}`}>
+        {fallbackIcon ? (
+          <div className="text-[48px] text-line-bright">{fallbackIcon}</div>
+        ) : (
+          <FiImage className="text-[48px] text-line-bright" />
+        )}
+      </div>
+    )
+  }
 
   return (
     <>
@@ -15,9 +34,11 @@ export default function ImageWithSkeleton({ className, alt, ...props }: ImagePro
       )}
       <Image
         {...props}
+        src={src}
         alt={alt}
         className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className || ''}`}
         onLoad={() => setIsLoaded(true)}
+        onError={() => setHasError(true)}
       />
     </>
   )
