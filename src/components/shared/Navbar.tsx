@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { NAV_LINKS } from "@/constants"
+import Image from "next/image"
 
 const Navbar = () => {
     const pathname = usePathname()
@@ -51,12 +52,7 @@ const Navbar = () => {
                 <div ref={dropdownRef} className="relative z-50 max-w-[1120px] mx-auto px-6 flex items-center justify-between h-[68px]">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-[10px]">
-                        <div className="w-[36px] h-[36px] bg-white [clip-path:polygon(0%_20%,20%_0%,80%_0%,100%_20%,100%_80%,80%_100%,20%_100%,0%_80%)] shadow-[0_0_0_2px_#000,0_0_14px_rgba(255,255,255,0.4)]">
-                            <img src="/assets/images/icons/icon.svg" alt="Logo" />
-                        </div>
-                        <div className="font-pixel text-[11px] text-text-main">
-                            teman<span className="text-xp">ngoding</span>.id
-                        </div>
+                        <Image src="/assets/images/icons/text-icon.svg" width={120} height={120} alt="Teman Ngoding" />
                     </Link>
 
                     {/* Desktop nav links */}

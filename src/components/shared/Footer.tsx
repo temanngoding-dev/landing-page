@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { NAV_LINKS, ADDRESS, WHATSAPP_NUMBER, MAP_LAT, MAP_LNG, WHATSAPP_DISPLAY, EMAIL_ADDRESS, OPERATIONAL_HOURS } from '@/constants'
 import { FiMapPin, FiCopy, FiCheck, FiMail, FiPhone, FiClock } from 'react-icons/fi'
 import Modal from './Modal'
+import Image from 'next/image'
 
 export default function Footer() {
   const [waInput, setWaInput] = useState('')
@@ -151,13 +152,8 @@ export default function Footer() {
 
           {/* ── Col 1: Brand ── */}
           <div className="min-[860px]:col-span-1">
-            <Link href="/" className="flex items-center gap-[10px] mb-[20px] group">
-              <div className="w-[36px] h-[36px] bg-white [clip-path:polygon(0%_20%,20%_0%,80%_0%,100%_20%,100%_80%,80%_100%,20%_100%,0%_80%)] shadow-[0_0_0_2px_#000,0_0_14px_rgba(255,255,255,0.4)] transition-shadow group-hover:shadow-[0_0_0_2px_#000,0_0_20px_rgba(255,255,255,0.6)]">
-                <img src="/assets/images/icons/icon.svg" alt="Logo" />
-              </div>
-              <div className="font-pixel text-[11px] text-text-main">
-                teman<span className="text-xp">ngoding</span>.id
-              </div>
+            <Link href="/" className="flex items-center gap-[10px] group">
+              <Image src="/assets/images/icons/text-icon.svg" width={1500} height={150} alt="Teman Ngoding" />
             </Link>
             <p className="text-[13px] text-text-dim leading-[1.7] mb-[20px]">
               Tempat privat &amp; les coding di Rancaekek buat yang serius mau jago IT. Kurikulum seru ala RPG Game.
@@ -315,9 +311,9 @@ export default function Footer() {
         </div>
       </div>
 
-      <Modal 
-        isOpen={modalState.isOpen} 
-        onClose={() => setModalState(prev => ({ ...prev, isOpen: false }))} 
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={() => setModalState(prev => ({ ...prev, isOpen: false }))}
         title={modalState.title}
       >
         {modalState.message}

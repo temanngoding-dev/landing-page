@@ -5,6 +5,7 @@ import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+
 export const metadata: Metadata = {
   title: {
     default: "temanngoding.id | Belajar IT Lebih Cepat",
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/images/web/cover.png",
+        url: "/assets/images/web/og-image.png",
         width: 1200,
         height: 630,
         alt: "Teman Ngoding Cover",
@@ -77,7 +78,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "temanngoding.id - Kursus Coding Rancaekek",
     description: "Private tutoring & course online dengan gamifikasi ala RPG Game!",
-    images: ["/assets/images/web/cover.png"],
+    images: ["/assets/images/web/og-image.png"],
   },
   robots: {
     index: true,
