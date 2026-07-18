@@ -33,7 +33,7 @@ const totalUniqueSkills = new Set([...mirzaSkills, ...rioSkills]).size;
 
 const mirzaExp = 4;
 const rioExp = 15;
-const maxExp = Math.max(mirzaExp, rioExp, 10); // Minimum 10 tahun sbg baseline
+const maxExp = Math.max(mirzaExp, rioExp, 10);
 
 const calcLevel = (skills: number, exp: number) => skills + Math.floor(exp * 1.5);
 
@@ -162,7 +162,7 @@ export const courses: CourseData[] = [
     title: 'Fun Arduino & Robotics',
     description: 'Belajar dasar robotika lewat simulasi & praktik Arduino yang seru dan interaktif!',
     longDescription: 'Bikin lampu otomatis sendiri? Atau alarm sensor gerak? Di quest ini, kamu bakal belajar dasar robotika dari nol tanpa perlu pusing rumus fisika yang rumit. Kita akan belajar cara kerja sensor, membuat kode logika sederhana, hingga merakit proyek hardware pertama kamu. Seru, penuh praktik, dan bikin kamu makin kreatif!',
-    syllabusUrl: '#',
+    syllabusUrl: '/assets/docs/silabus/fun-arduino-and-robotics.pdf',
     topics: [
       'Arduino Basics',
       'Sensors & Actuators',
