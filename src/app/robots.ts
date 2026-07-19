@@ -4,8 +4,7 @@ export default function robots(): MetadataRoute.Robots {
     return {
         rules: {
             userAgent: '*',
-            allow: ['/', '/api/og/*'],
-            disallow: '/api/',
+            allow: '/'
         },
         sitemap: 'https://temanngoding.id/sitemap.xml',
     };

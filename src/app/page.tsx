@@ -143,7 +143,7 @@ export default function Home() {
                     : 0
                   return (
                     <Link
-                      href={`/paket/${pkg.slug}`}
+                      href={`/package/${pkg.slug}`}
                       key={pkg.slug}
                       className="bg-bg-panel border-2 border-line transition-all hover:border-mana hover:bg-bg-panel-2 group relative flex flex-col cursor-pointer"
                     >
@@ -197,7 +197,7 @@ export default function Home() {
             {learningPackages.length > 0 && (
               <div className="text-center mt-[32px]">
                 <Link
-                  href="/paket"
+                  href="/package"
                   className="font-mono text-[13px] text-mana border border-mana/40 px-[20px] py-[10px] hover:bg-[rgba(124,155,255,0.08)] transition-colors inline-flex items-center gap-2"
                 >
                   Lihat Semua Paket →

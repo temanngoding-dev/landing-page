@@ -28,7 +28,7 @@ export default function CoursePage() {
               Pilih quest yang sesuai level kamu sekarang. Tiap quest punya learning path yang jelas dari awal sampai akhir.
             </p>
             <Link
-              href="/paket"
+              href="/package"
               className="inline-flex items-center gap-2 font-mono text-[13px] text-mana border border-mana px-[16px] py-[8px] bg-[rgba(124,155,255,0.06)] hover:bg-[rgba(124,155,255,0.12)] transition-colors"
             >
               <FiPackage className="inline-block mr-2" /> Lihat Paket Bundling — lebih hemat!
@@ -77,7 +77,7 @@ export default function CoursePage() {
           <p className="font-mono text-text-dim mb-[32px]">Slot belajar terbatas tiap minggunya. Mulai quest pertamamu sekarang.</p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link
-              href="/paket"
+              href="/package"
               className="font-mono font-semibold text-[14px] px-[24px] py-[14px] border-2 border-black shadow-[4px_4px_0_#000] cursor-pointer transition-all inline-flex items-center gap-[8px] bg-xp text-[#04140d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#000]"
             >
               <FiPackage className="inline-block mr-1" /> LIHAT PAKET BUNDLING

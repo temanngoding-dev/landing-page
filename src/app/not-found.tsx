@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: '404 — Quest Not Found | Teman Ngoding',
+  title: '404 - Quest Not Found | Teman Ngoding',
   description: 'Halaman yang kamu cari tidak ditemukan.',
 }
 

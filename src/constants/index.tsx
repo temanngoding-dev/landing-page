@@ -25,43 +25,33 @@ import type {
   BlogPost
 } from '@/types';
 
-const mirzaSkills = ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Vue.js', 'Nuxt.js', 'Redis', 'Pinia', 'Typescript', 'Zustand', 'Redux', 'SQlite', 'MySQL', 'MongoDB', 'Express', 'NestJS', 'Code Igniter', 'Postman', 'Git', 'GitHub', 'GitLab', 'Figma', 'JWT Auth', 'OAuth'];
-
-const rioSkills = ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Docker', 'IOT Stack', 'Arduino', 'ESP32', 'Appscript', 'PHP', 'MySQL', 'SQLite', 'MongoDB', 'Express', 'Postman', 'Git', 'GitHub', 'GitLab', 'Figma', 'JWT Auth', 'OAuth', 'Proxmox', 'Mikrotik', 'Roblox', 'Web3', 'Expo', 'C#', 'VB.NET', 'Python', 'React Native'];
-
-const totalUniqueSkills = new Set([...mirzaSkills, ...rioSkills]).size;
-
-const mirzaExp = 4;
-const rioExp = 15;
-const maxExp = Math.max(mirzaExp, rioExp, 10);
-
-const calcLevel = (skills: number, exp: number) => skills + Math.floor(exp * 1.5);
+import { calcLevel, calculatePackageStats } from '@/hooks';
 
 export const mentors: MentorData[] = [
   {
     id: 'MENTOR_01',
     name: 'Mirza Qamaruzzaman',
     title: 'Frontend Engineer',
-    level: calcLevel(mirzaSkills.length, mirzaExp),
+    level: calcLevel(25, 4),
     image: '/assets/images/mentor/mirza.png',
-    bio: `Fullstack engineer dengan spesialisasi di bidang Frontend Web Development. Pengalaman lebih dari ${mirzaExp} tahun di industri tech dengan berbagai tech stack modern seperti Next.js, Laravel, PostgreSQL, dll.`,
-    skills: mirzaSkills,
+    bio: `Fullstack engineer dengan spesialisasi di bidang Frontend Web Development. Pengalaman lebih dari 4 tahun di industri tech dengan berbagai tech stack modern seperti Next.js, Laravel, PostgreSQL, dll.`,
+    skills: ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Vue.js', 'Nuxt.js', 'Redis', 'Pinia', 'Typescript', 'Zustand', 'Redux', 'SQlite', 'MySQL', 'MongoDB', 'Express', 'NestJS', 'Code Igniter', 'Postman', 'Git', 'GitHub', 'GitLab', 'Figma', 'JWT Auth', 'OAuth'],
     stats: [
-      { label: 'EXP (Experience)', valueText: `${mirzaExp}+ Tahun`, percent: Math.round((mirzaExp / maxExp) * 100), color: '#52e0a8' },
-      { label: 'MANA (Knowledge)', valueText: `${mirzaSkills.length}+ Tech Stack`, percent: Math.round((mirzaSkills.length / totalUniqueSkills) * 100), color: '#7c9bff' }
+      { label: 'EXP (Experience)', valueText: `4+ Tahun`, percent: Math.round((4 / 15) * 100), color: '#52e0a8' },
+      { label: 'MANA (Knowledge)', valueText: `25+ Tech Stack`, percent: Math.round((25 / 31) * 100), color: '#7c9bff' }
     ],
   },
   {
     id: 'MENTOR_02',
     name: 'Rio Andrianto S.Kom.',
     title: 'Fullstack Engineer, Embedded Systems Engineer',
-    level: calcLevel(rioSkills.length, rioExp),
+    level: calcLevel(31, 15),
     image: '/assets/images/mentor/rio.png',
-    bio: `Fullstack engineer dengan pengalaman lebih dari ${rioExp} tahun di industri tech. Spesialisasi di React, Next.js, Laravel, Arsitektur Backend Modern dan Embedded Systems. Berpengalaman membangun berbagai project nyata, termasuk IoT dan sistem otomasi.`,
-    skills: rioSkills,
+    bio: `Fullstack engineer dengan pengalaman lebih dari 15 tahun di industri tech. Spesialisasi di React, Next.js, Laravel, Arsitektur Backend Modern dan Embedded Systems. Berpengalaman membangun berbagai project nyata, termasuk IoT dan sistem otomasi.`,
+    skills: ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Docker', 'IOT Stack', 'Arduino', 'ESP32', 'Appscript', 'PHP', 'MySQL', 'SQLite', 'MongoDB', 'Express', 'Postman', 'Git', 'GitHub', 'GitLab', 'Figma', 'JWT Auth', 'OAuth', 'Proxmox', 'Mikrotik', 'Roblox', 'Web3', 'Expo', 'C#', 'VB.NET', 'Python', 'React Native'],
     stats: [
-      { label: 'EXP (Experience)', valueText: `${rioExp}+ Tahun`, percent: Math.round((rioExp / maxExp) * 100), color: '#52e0a8' },
-      { label: 'MANA (Knowledge)', valueText: `${rioSkills.length}+ Tech Stack`, percent: Math.round((rioSkills.length / totalUniqueSkills) * 100), color: '#7c9bff' }
+      { label: 'EXP (Experience)', valueText: `15+ Tahun`, percent: Math.round((15 / 15) * 100), color: '#52e0a8' },
+      { label: 'MANA (Knowledge)', valueText: `31+ Tech Stack`, percent: Math.round((31 / 31) * 100), color: '#7c9bff' }
     ],
   },
 ];
@@ -188,31 +178,71 @@ export const courses: CourseData[] = [
       'Anak kreatif yang suka mengulik dan membuat barang baru',
     ],
   },
+  {
+    slug: "js-mastery",
+    icon: <FiGlobe />,
+    image: "/assets/images/course/js-mastery.png",
+    packageName: "Private 1-on-1",
+    title: "JS Mastery",
+    description: "belajar bikin website interaktif dan logika program dimulai dari 0 dengan praktisi ahli",
+    longDescription: "Menguasai JavaScript dari dasar hingga tingkat industri. Kamu akan diajarkan dari logika dasar pemrograman, manipulasi DOM untuk membuat halaman interaktif, standardisasi sintaks modern ES6, pengenalan Node.js, hingga pembuatan proyek game web riil dan penentuan jalur karier Frontend vs Backend.",
+    syllabusUrl: "/assets/docs/silabus/js-mastery.pdf",
+    topics: [
+      "Logika Dasar JS",
+      "Control Flow & Fungsi",
+      "DOM Selection & Manipulation",
+      "JavaScript Modern ES6",
+      "Node.js & NPM",
+      "Simple Game Development",
+      "Frontend vs Backend Path"
+    ],
+    sessions: 8,
+    difficulty: "MEDIUM",
+    difficultyColor: "#feca57",
+    xp: 400,
+    level: 2,
+    price: 499999,
+    originalPrice: 899999,
+    point: [
+      "Total 8 Sesi Intensif Pembelajaran",
+      "Logika & Pemrograman Dasar JavaScript",
+      "Control Flow, Looping & Functions",
+      "DOM Selection & Manipulation (Event Listener)",
+      "Sintaks Modern ES6 & Array Methods (.map, .filter, .reduce)",
+      "Pengenalan Node.js & NPM Package Management",
+      "Project Simple Game Dev (Tebak Angka, Tic-Tac-Toe, dsb)",
+      "Career Roadmap (Frontend vs Backend Path)",
+      "70% Hands-on Coding & Project, 30% Teori Konteks Industri"
+    ],
+    targetAudience: [
+      "Pemula yang ingin bertransformasi menjadi praktisi JavaScript siap industri",
+      "Pelajar atau profesional yang ingin mendalami logika pemrograman dan membuat web interaktif",
+      "Siapapun yang ingin memulai karier sebagai Frontend atau Backend Developer"
+    ]
+  }
 ];
 
+
 export const learningPackages: LearningPackage[] = [
-  // {
-  //   slug: 'traditional-frontend-package',
-  //   title: 'Traditional Frontend Package',
-  //   tagline: 'Dari nol sampai punya website sendiri',
-  //   icon: '🚀',
-  //   image: '/assets/images/package/frontend-package.png',
-  //   courseSlugs: ['basic-web-dev', 'css-mastery', 'js-mastery'],
-  //   totalSessions: 6,
-  //   totalXP: 150,
-  //   price: 450000,
-  //   originalPrice: 900000,
-  //   level: 1,
-  //   difficulty: 'EASY',
-  //   difficultyColor: '#52e0a8',
-  //   description: 'Paket entry-level untuk kamu yang baru mau memulai perjalanan di dunia web. Fokus pada satu course yang solid agar fondasi kamu kuat sebelum naik ke level berikutnya.',
-  //   highlights: [
-  //     'Cocok buat pemula total',
-  //     '2 sesi private 1-on-1',
-  //     'Hasil: personal blog live',
-  //     'Bisa lanjut ke paket berikutnya',
-  //   ],
-  // }
+  {
+    slug: 'traditional-frontend-package',
+    title: 'Traditional Frontend Package',
+    tagline: 'Dari nol sampai punya website sendiri',
+    icon: '🚀',
+    image: '/assets/images/package/frontend-package.png',
+    courseSlugs: ['basic-web-dev', 'css-mastery', 'js-mastery'],
+    ...calculatePackageStats(['basic-web-dev', 'css-mastery', 'js-mastery'], courses),
+    level: 1,
+    difficulty: 'EASY',
+    difficultyColor: '#52e0a8',
+    description: 'Paket entry-level untuk kamu yang baru mau memulai perjalanan di dunia web. Fokus pada satu course yang solid agar fondasi kamu kuat sebelum naik ke level berikutnya.',
+    highlights: [
+      'Cocok buat pemula total',
+      '2 sesi private 1-on-1',
+      'Hasil: personal blog live',
+      'Bisa lanjut ke paket berikutnya',
+    ],
+  }
 ];
 
 export const devServices: DevService[] = [
@@ -288,14 +318,14 @@ export const testimonials: TestimonialData[] = [
 export const NAV_LINKS: NavLink[] = [
   { href: '/', label: 'Home' },
   { href: '/course', label: 'Courses' },
-  { href: '/paket', label: 'Packages' },
+  { href: '/package', label: 'Packages' },
   {
     href: '#',
     label: 'Services',
     children: [
-      { href: '/jasa-dev', label: 'Web Development' },
-      { href: '/jasa-dev#web-freelance', label: 'Web Freelance' },
-      { href: '/jasa-dev#hire-programmer', label: 'Hire a Programmer' },
+      { href: '/services', label: 'Web Development' },
+      { href: '/services#web-freelance', label: 'Web Freelance' },
+      { href: '/services#hire-programmer', label: 'Hire a Programmer' },
     ],
   },
   { href: '/blog', label: 'Blog' },

@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
 
     const paketPages = learningPackages.map(p => ({
-        url: `${baseUrl}/paket/${p.slug}`,
+        url: `${baseUrl}/package/${p.slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.7,
@@ -40,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         ...coursePages,
         {
-            url: `${baseUrl}/paket`,
+            url: `${baseUrl}/package`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.8,
@@ -54,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         ...blogPages,
         {
-            url: `${baseUrl}/jasa-dev`,
+            url: `${baseUrl}/services`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.8,
@@ -64,12 +64,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.7,
-        },
-        {
-            url: `${baseUrl}/api/og`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.3,
         },
     ];
 }

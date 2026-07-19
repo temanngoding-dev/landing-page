@@ -229,7 +229,7 @@ export default async function CourseDetailPage({ params }: Props) {
                 {relatedPackages.map((pkg) => (
                   <Link
                     key={pkg.slug}
-                    href={`/paket/${pkg.slug}`}
+                    href={`/package/${pkg.slug}`}
                     className="bg-bg-deep border-2 border-line p-[20px] hover:border-gold hover:bg-bg-panel-2 transition-all group"
                   >
                     <div className="text-[28px] mb-[10px]">{pkg.icon}</div>

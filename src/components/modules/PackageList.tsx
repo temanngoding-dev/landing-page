@@ -106,7 +106,7 @@ export default function PackageList({ packages, courses }: { packages: LearningP
 
             return (
               <Link
-                href={`/paket/${pkg.slug}`}
+                href={`/package/${pkg.slug}`}
                 key={pkg.slug}
                 className="bg-bg-panel border-2 border-line transition-all hover:border-mana hover:bg-bg-panel-2 group relative flex flex-col cursor-pointer"
               >
