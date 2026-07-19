@@ -35,7 +35,7 @@ export const mentors: MentorData[] = [
     level: calcLevel(25, 4),
     image: '/assets/images/mentor/mirza.png',
     bio: `Fullstack engineer dengan spesialisasi di bidang Frontend Web Development. Pengalaman lebih dari 4 tahun di industri tech dengan berbagai tech stack modern seperti Next.js, Laravel, PostgreSQL, dll.`,
-    skills: ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Vue.js', 'Nuxt.js', 'Redis', 'Pinia', 'Typescript', 'Zustand', 'Redux', 'SQlite', 'MySQL', 'MongoDB', 'Express', 'NestJS', 'Code Igniter', 'Postman', 'Git', 'GitHub', 'GitLab', 'Figma', 'JWT Auth', 'OAuth'],
+    skills: ['React', 'Next.js', 'Laravel', 'Node.js', 'PostgreSQL', 'Vue.js', 'Nuxt.js', 'Redis', 'Pinia', 'Typescript', 'Zustand', 'Redux', 'SQlite', 'MySQL', 'MongoDB', 'Express', 'NestJS', 'Code Igniter', 'Postman', 'Git', 'GitHub', 'GitLab', 'Figma', 'JWT Auth', 'OAuth', 'PHP', 'Bootstrap', 'Tailwind CSS', 'Material UI', 'Shadcn UI', 'React Native', 'Ionic Framework'],
     stats: [
       { label: 'EXP (Experience)', valueText: `4+ Tahun`, percent: Math.round((4 / 15) * 100), color: '#52e0a8' },
       { label: 'MANA (Knowledge)', valueText: `25+ Tech Stack`, percent: Math.round((25 / 31) * 100), color: '#7c9bff' }
